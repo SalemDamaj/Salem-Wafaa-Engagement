@@ -32,6 +32,10 @@
       --text-muted: #796e68;
       --shadow-luxury: 0 20px 45px rgba(197, 160, 89, 0.15), 0 8px 20px rgba(0, 0, 0, 0.04);
       --border-gold: 1px solid rgba(197, 160, 89, 0.32);
+      
+      /* ألوان المغلف الفاخرة */
+      --env-velvet: #4a0e17; /* عنابي مخملي غامق */
+      --env-velvet-light: #6b1825;
     }
 
     * {
@@ -72,122 +76,180 @@
     }
 
     /* =========================================
-       1. INTRO OVERLAY / WAX SEAL
+       1. شاشة افتتاحية: المغلف التفاعلي ثلاثي الأبعاد
     ========================================= */
     #introOverlay {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background: radial-gradient(ellipse at 50% 50%, #2f2520, #141110);
+      background: radial-gradient(ellipse at 50% 50%, #221a19, #0d0a0a);
       z-index: 9999;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 1.4s cubic-bezier(0.77, 0, 0.175, 1), transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
-      padding: 20px;
-      color: #fff;
-      text-align: center;
+      transition: opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1), transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
       overflow: hidden;
     }
 
     #introOverlay.opened {
       opacity: 0;
-      transform: scale(1.15);
+      transform: scale(1.1);
       pointer-events: none;
     }
 
-    .intro-sparkle {
-      position: absolute;
-      width: 4px; height: 4px;
-      background: var(--gold-primary);
-      border-radius: 50%;
-      opacity: 0;
-      animation: sparkleFloat 4s ease-in-out infinite;
-    }
-
-    @keyframes sparkleFloat {
-      0% { opacity: 0; transform: translateY(0) scale(0); }
-      50% { opacity: 1; transform: translateY(-60px) scale(1); }
-      100% { opacity: 0; transform: translateY(-120px) scale(0); }
-    }
-
-    .seal-container {
-      cursor: pointer;
+    /* حاوية المغلف والمنظور ثلاثي الأبعاد */
+    .envelope-wrapper {
       position: relative;
-      margin-bottom: 24px;
+      width: 320px;
+      height: 220px;
+      perspective: 1000px;
+      margin-bottom: 40px;
+      cursor: pointer;
     }
 
-    .wax-seal {
-      width: 110px;
-      height: 110px;
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: var(--env-velvet);
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      transform-style: preserve-3d;
+    }
+
+    /* لسان المغلف (المثلث العلوي) */
+    .envelope-flap {
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-top: 120px solid var(--env-velvet-light);
+      transform-origin: top;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.3s;
+      z-index: 4;
+    }
+
+    /* الجيوب السفلية والجانبية للمغلف */
+    .envelope-pocket {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 0;
+      border-left: 160px solid rgba(107, 24, 37, 0.95);
+      border-right: 160px solid rgba(107, 24, 37, 0.95);
+      border-bottom: 110px solid rgba(74, 14, 23, 0.98);
+      border-radius: 0 0 12px 12px;
+      z-index: 3;
+    }
+
+    /* بطاقة الدعوة داخل المغلف */
+    .envelope-letter {
+      position: absolute;
+      bottom: 10px;
+      left: 15px;
+      width: 290px;
+      height: 180px;
+      background: #fdfaf5;
+      border: 1px double rgba(197, 160, 89, 0.5);
+      border-radius: 8px;
+      z-index: 2;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+      padding: 18px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .letter-title {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 1.6rem;
+      color: var(--gold-dark);
+    }
+
+    .letter-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .letter-guest-box {
+      border-top: 1px dashed rgba(197, 160, 89, 0.3);
+      padding-top: 8px;
+    }
+
+    .letter-guest-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .letter-guest-name {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 1.25rem;
+      color: #1a1615;
+      font-weight: 700;
+    }
+
+    /* ختم الشمع الذهبي التفاعلي */
+    .envelope-seal {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%) scale(1);
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
       background: var(--gold-gradient);
-      box-shadow: 0 12px 35px rgba(197, 160, 89, 0.5), 0 0 60px rgba(197, 160, 89, 0.3), inset 0 3px 6px rgba(255,255,255,0.5);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255,255,255,0.4);
+      border: 2px solid rgba(255,255,255,0.2);
+      z-index: 5;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Aref Ruqaa', serif;
-      font-size: 2.2rem;
+      font-size: 1.15rem;
       color: #fff;
-      border: 3px solid rgba(255, 255, 255, 0.35);
-      animation: sealPulse 2.5s infinite;
-      transition: transform 0.4s;
+      font-weight: 700;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
     }
 
-    .seal-container:hover .wax-seal {
-      transform: scale(1.1);
+    /* حالة فتح المغلف (عند كبس الزر) */
+    .envelope-wrapper.open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1; /* ينزل للخلف خلف الرسالة */
     }
 
-    @keyframes sealPulse {
-      0%, 100% { box-shadow: 0 12px 35px rgba(197, 160, 89, 0.5); }
-      50% { box-shadow: 0 12px 45px rgba(197, 160, 89, 0.8), 0 0 70px rgba(197, 160, 89, 0.4); }
+    .envelope-wrapper.open .envelope-letter {
+      transform: translateY(-130px) scale(1.04);
+      z-index: 4; /* ترتفع للأعلى لتصبح أمام المغلف */
     }
 
-    .intro-title {
-      font-family: 'Aref Ruqaa', serif;
-      font-size: 2.6rem;
+    .envelope-wrapper.open .envelope-seal {
+      transform: translateX(-50%) scale(0);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* تنبيه الضغط */
+    .tap-hint {
       color: var(--gold-light);
-      margin-bottom: 6px;
-      letter-spacing: 2px;
-    }
-
-    .intro-subtitle {
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 12px;
-    }
-
-    /* VIP Personalization inside Intro */
-    .vip-intro-guest {
-      display: none;
-      background: rgba(197, 160, 89, 0.2);
-      border: 1px solid rgba(197, 160, 89, 0.4);
-      padding: 6px 18px;
-      border-radius: 20px;
       font-size: 0.95rem;
-      color: var(--gold-light);
-      margin-bottom: 22px;
-    }
-
-    .open-btn-hint {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 12px 28px;
-      border-radius: 30px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(197, 160, 89, 0.45);
-      color: var(--gold-light);
-      font-size: 0.95rem;
+      gap: 8px;
+      animation: hintBounce 2s infinite;
       cursor: pointer;
-      animation: hintBounce 2.5s infinite;
     }
 
     @keyframes hintBounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-      60% { transform: translateY(-5px); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
     }
 
     /* =========================================
@@ -257,7 +319,7 @@
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     /* =========================================
-       3. MAIN LAYOUT & CARDS
+       3. LAYOUT & CARDS
     ========================================= */
     .container {
       max-width: 520px;
@@ -328,9 +390,9 @@
       display: none;
       background: linear-gradient(135deg, rgba(197, 160, 89, 0.15), rgba(229, 179, 179, 0.2));
       border: 1px solid var(--gold-primary);
-      padding: 10px 18px;
+      padding: 12px 18px;
       border-radius: 30px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       text-align: center;
     }
 
@@ -635,32 +697,45 @@
   </audio>
 
   <!-- =========================================
-       1. INTRO / WAX SEAL
+       1. شاشة الافتتاح: المغلف ثلاثي الأبعاد
   ========================================= -->
   <div id="introOverlay">
+    <!-- تأثير النجوم العائمة -->
     <div class="intro-sparkle" style="top: 15%; left: 20%;"></div>
-    <div class="intro-sparkle" style="top: 60%; left: 10%;"></div>
-    <div class="intro-sparkle" style="top: 70%; left: 80%;"></div>
+    <div class="intro-sparkle" style="top: 25%; left: 80%;"></div>
+    <div class="intro-sparkle" style="top: 75%; left: 15%;"></div>
 
-    <div class="seal-container" onclick="openInvitation()">
-      <div class="wax-seal">س & و</div>
+    <!-- المغلف -->
+    <div class="envelope-wrapper" id="envelopeContainer" onclick="openInvitation()">
+      <div class="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-pocket"></div>
+        
+        <!-- الرسالة الداخلية -->
+        <div class="envelope-letter">
+          <h2 class="letter-title">سالم & وفاء</h2>
+          <p class="letter-subtitle">دعوة خطوبة</p>
+          
+          <div class="letter-guest-box">
+            <p class="letter-guest-label">حضوركم يسعدنا</p>
+            <p id="envelopeGuestName" class="letter-guest-name">ضيوفنا الكرام</p>
+          </div>
+        </div>
+
+        <!-- ختم الشمع الذهبي -->
+        <div class="envelope-seal">س & و</div>
+      </div>
     </div>
-    <h1 class="intro-title">سالم & وفاء</h1>
-    <p class="intro-subtitle">دعوة لحضور حفل الخطوبة المبارك</p>
 
-    <!-- Personalized name in intro if available -->
-    <div id="introGuestBadge" class="vip-intro-guest">
-      دعوة خاصة لـ: <span id="introGuestName"></span>
-    </div>
-
-    <div class="open-btn-hint" onclick="openInvitation()">
-      <i class="fa-regular fa-envelope-open"></i>
-      <span>اضغط لفتح بطاقة الدعوة</span>
+    <!-- تلميح الضغط للفتح -->
+    <div class="tap-hint" onclick="openInvitation()">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      <span>اضغط على ختم الشمع لفتح الدعوة</span>
     </div>
   </div>
 
   <!-- =========================================
-       2. MUSIC BAR
+       2. FLOATING MUSIC BAR
   ========================================= -->
   <div class="music-bar" id="musicToggle">
     <div class="music-disc"><i class="fa-solid fa-music"></i></div>
@@ -685,7 +760,7 @@
     <section class="invitation-card hero reveal">
       <div class="monogram-badge">س & و</div>
       
-      <!-- PERSONALIZED VIP GUEST BANNER -->
+      <!-- شارة ترحيب مخصصة للشخص المدعو -->
       <div id="vipBadge" class="vip-guest-badge">
         <span class="badge-title">✨ دعوة خاصة ومميزة ✨</span>
         <span id="vipGuestName" class="guest-name-highlight">ضيوفنا الكرام</span>
@@ -794,7 +869,7 @@
       </a>
     </section>
 
-    <!-- RSVP (WHATSAPP + GUEST LIMIT) -->
+    <!-- RSVP -->
     <section class="invitation-card reveal" id="rsvp">
       <h2 class="section-title gold-shimmer-text">تأكيد الحضور</h2>
       <p class="section-subtitle">يرجى تأكيد الحضور قبل 15 سبتمبر 2026</p>
@@ -869,9 +944,8 @@
     if (guestNameParam) {
       const cleanName = decodeURIComponent(guestNameParam).replace(/\+/g, ' ');
       
-      // إظهار الاسم في غلاف البداية
-      document.getElementById('introGuestBadge').style.display = 'inline-block';
-      document.getElementById('introGuestName').innerText = cleanName;
+      // إظهار الاسم داخل كرت الرسالة بالمغلف
+      document.getElementById('envelopeGuestName').innerText = cleanName;
 
       // إظهار بطاقة الـ VIP في الصفحة
       document.getElementById('vipBadge').style.display = 'block';
@@ -901,7 +975,7 @@
     }
 
     // ====================================================
-    // 2. الصوت والافتتاح
+    // 2. الصوت والافتتاح (دوران المغلف ورفع الرسالة)
     // ====================================================
     const bgMusic = document.getElementById("bgMusic");
     const musicToggle = document.getElementById("musicToggle");
@@ -912,12 +986,20 @@
       if (invitationOpened) return;
       invitationOpened = true;
 
-      const overlay = document.getElementById("introOverlay");
-      overlay.classList.add("opened");
+      // إضافة كلاس الفتح للمغلف لتفعيل الـ CSS 3D
+      const envelopeContainer = document.getElementById("envelopeContainer");
+      envelopeContainer.classList.add("open");
 
-      setTimeout(() => { overlay.style.display = 'none'; }, 1500);
-      setTimeout(() => { musicToggle.classList.add("visible"); }, 600);
+      // تلاشي واجهة الافتتاح كاملة ودخول الصفحة الرئيسية بعد إتمام الأنيميشن
+      setTimeout(() => {
+        const overlay = document.getElementById("introOverlay");
+        overlay.classList.add("opened");
+        
+        // إظهار مشغل الموسيقى العائم
+        setTimeout(() => { musicToggle.classList.add("visible"); }, 600);
+      }, 1600); // 1.6 ثانية كافية لرؤية لسان المغلف ينفتح والرسالة ترتفع
 
+      // بدء تشغيل الصوت
       bgMusic.volume = 0;
       const playPromise = bgMusic.play();
 
@@ -932,7 +1014,10 @@
         });
       }
 
-      confetti({ particleCount: 70, spread: 85, origin: { y: 0.55 }, colors: ['#c5a059', '#e5b3b3', '#ffffff'] });
+      // إطلاق قصاصات الاحتفال
+      setTimeout(() => {
+        confetti({ particleCount: 80, spread: 85, origin: { y: 0.55 }, colors: ['#c5a059', '#e5b3b3', '#ffffff'] });
+      }, 800);
     }
 
     function retryPlay() {
@@ -1021,7 +1106,7 @@
     updateCountdown();
 
     // ====================================================
-    // 5. التقويم والتأثيرات
+    // 5. تأثيرات المظهر والتقويم والـ Lightbox
     // ====================================================
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salem & Wafaa — Engagement Invitation</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --bg-cream: #faf7f2;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --gold-primary: #c5a059;
+      --gold-light: #e8d5b5;
+      --gold-dark: #9a7632;
+      --rose-accent: #e5b8b8;
+      --rose-subtle: #f8eeee;
+      --text-dark: #2c2523;
+      --text-muted: #726763;
+      --shadow-soft: 0 15px 35px rgba(197, 160, 89, 0.12), 0 5px 15px rgba(0, 0, 0, 0.04);
+      --border-gold: 1px solid rgba(197, 160, 89, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Background Pattern */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: radial-gradient(circle at 15% 20%, rgba(229, 184, 184, 0.25), transparent 40%),
+                  radial-gradient(circle at 85% 80%, rgba(197, 160, 89, 0.18), transparent 45%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Floating Music Control */
+    .music-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: white;
+      border: var(--border-gold);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      color: var(--gold-primary);
+      font-size: 1.2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .music-btn.playing {
+      animation: rotate 5s linear infinite;
+      border-color: var(--gold-primary);
+      color: var(--gold-dark);
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Container for Mobile-First Luxury Frame */
+    .container {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 24px 18px 80px;
+    }
+
+    /* Typography */
+    .script-font {
+      font-family: 'Great Vibes', cursive;
+    }
+    .serif-font {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      text-align: center;
+      color: var(--gold-dark);
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    /* Card Component */
+    .invitation-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: var(--border-gold);
+      border-radius: 24px;
+      padding: 38px 24px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 50px 20px 36px;
+    }
+
+    .monogram {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--gold-primary);
+      width: 76px;
+      height: 76px;
+      border: 1px solid var(--gold-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      letter-spacing: 2px;
+      background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(248,238,238,0.5));
+    }
+
+    .invitation-header {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .couple-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.8rem;
+      color: var(--gold-dark);
+      line-height: 1.1;
+      margin: 10px 0;
+      font-weight: normal;
+    }
+
+    .ampersand {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      color: var(--rose-accent);
+      display: block;
+      margin: -6px 0;
+    }
+
+    .event-type {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      margin: 18px 0;
+    }
+
+    .ornament {
+      width: 140px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+      margin: 20px auto;
+    }
+
+    /* Countdown Timer */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .time-box {
+      background: rgba(255, 255, 255, 0.9);
+      border: var(--border-gold);
+      border-radius: 14px;
+      padding: 14px 6px;
+      text-align: center;
+    }
+
+    .time-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold-dark);
+      line-height: 1;
+    }
+
+    .time-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Action Buttons */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: white;
+      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 10px 25px rgba(197, 160, 89, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-dark);
+    }
+
+    .btn-outline:hover {
+      background: rgba(197, 160, 89, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Timeline / Itinerary */
+    .timeline {
+      position: relative;
+      padding: 10px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, var(--gold-primary), transparent);
+    }
+
+    .timeline-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-content {
+      width: 44%;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      text-align: left;
+      order: 2;
+    }
+
+    .timeline-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      color: var(--gold-dark);
+      font-size: 1.25rem;
+    }
+
+    .timeline-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .timeline-dot {
+      width: 14px;
+      height: 14px;
+      background: var(--bg-cream);
+      border: 2px solid var(--gold-primary);
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    /* Photo Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: var(--border-gold);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Dress Code Palette */
+    .palette {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin: 18px 0 10px;
+    }
+
+    .color-swatch {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* RSVP Form */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border: var(--border-gold);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .radio-card {
+      flex: 1;
+      position: relative;
+    }
+
+    .radio-card input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .radio-custom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 8px;
+      background: rgba(255, 255, 255, 0.7);
+      border: var(--border-gold);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .radio-card input:checked + .radio-custom {
+      background: var(--gold-light);
+      border-color: var(--gold-primary);
+      color: var(--gold-dark);
+      font-weight: 600;
+    }
+
+    /* Modal / Lightbox */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 12px;
+      border: 2px solid white;
+    }
+
+    /* Toast Notification */
+    .toast {
+      visibility: hidden;
+      min-width: 280px;
+      background-color: var(--text-dark);
+      color: #fff;
+      text-align: center;
+      border-radius: 30px;
+      padding: 14px 24px;
+      position: fixed;
+      z-index: 3000;
+      left: 50%;
+      bottom: 90px;
+      transform: translateX(-50%);
+      font-size: 0.85rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 3.5s;
+    }
+    @keyframes fadein { from { bottom: 60px; opacity: 0; } to { bottom: 90px; opacity: 1; } }
+    @keyframes fadeout { from { bottom: 90px; opacity: 1; } to { bottom: 60px; opacity: 0; } }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Audio Element (Replace mp3 link with your favorite song) -->
+  <audio id="bgMusic" loop>
+    <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-moment-in-paris-1002.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Floating Music Toggle -->
+  <div class="music-btn" id="musicToggle" title="Play Background Music">
+    <i class="fa-solid fa-music"></i>
+  </div>
+
+  <main class="container">
+
+    <!-- HERO CARD -->
+    <section class="invitation-card hero">
+      <div class="monogram">S & W</div>
+      <p class="invitation-header">Together With Their Families</p>
+      
+      <h1 class="couple-names">
+        Salem
+        <span class="ampersand">&</span>
+        Wafaa
+      </h1>
+
+      <p class="event-type">Request The Pleasure Of Your Company<br>At Their Engagement Celebration</p>
+
+      <div class="ornament"></div>
+
+      <div style="margin: 18px 0;">
+        <p class="serif-font" style="font-size: 1.7rem; color: var(--gold-dark); font-weight: 600;">
+          Saturday, October 10, 2026
+        </p>
+        <p style="font-size: 0.95rem; color: var(--text-muted); letter-spacing: 1px;">
+          At 6:00 in the Evening
+        </p>
+        <p style="font-size: 1.1rem; font-weight: 500; margin-top: 6px;">
+          <i class="fa-solid fa-location-dot" style="color: var(--gold-primary); margin-right: 6px;"></i> Fayroz Hall
+        </p>
+      </div>
+
+      <div class="btn-group">
+        <a href="#rsvp" class="btn btn-primary"><i class="fa-regular fa-envelope"></i> RSVP Now</a>
+        <button onclick="addToCalendar()" class="btn btn-outline"><i class="fa-regular fa-calendar-plus"></i> Add To Calendar</button>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN CARD -->
+    <section class="invitation-card">
+      <h2 class="section-title">Counting Down</h2>
+      <p class="section-subtitle">Until We Say Forever</p>
+      
+      <div class="countdown-grid">
+        <div class="time-box">
+          <div class="time-val" id="days">00</div>
+          <div class="time-label">Days</div>
+        </div>
+        <div class="time-box">
+          <div class="time-val" id="hours">00</div>
+          <div class="time-label">Hours</div>
+        </div>
+        <div class="time-box">
+          <div class="time-val" id="minutes">00</div>
+          <div class="time-label">Mins</div>
+        </div>
+        <div class="time-box">
+          <div class="time-val" id="seconds">00</div>
+          <div class="time-label">Secs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR STORY / GALLERY CARD -->
+    <section class="invitation-card">
+      <h2 class="section-title">Moments & Memories</h2>
+      <p class="section-subtitle">Our Journey Together</p>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=700&auto=format&fit=crop" class="gallery-img" onclick="openLightbox(this.src)" alt="Salem and Wafaa Moment 1">
+        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=700&auto=format&fit=crop" class="gallery-img" onclick="openLightbox(this.src)" alt="Salem and Wafaa Moment 2">
+        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=700&auto=format&fit=crop" class="gallery-img" onclick="openLightbox(this.src)" alt="Salem and Wafaa Moment 3">
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=700&auto=format&fit=crop" class="gallery-img" onclick="openLightbox(this.src)" alt="Salem and Wafaa Moment 4">
+      </div>
+    </section>
+
+    <!-- ITINERARY / SCHEDULE CARD -->
+    <section class="invitation-card">
+      <h2 class="section-title">Event Schedule</h2>
+      <p class="section-subtitle">Evening Flow</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-time">6:00 PM</div>
+            <div class="timeline-title">Welcome & Drinks</div>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content"></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">7:30 PM</div>
+            <div class="timeline-title">Ring Ceremony</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-time">8:30 PM</div>
+            <div class="timeline-title">Dinner & Dancing</div>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DRESS CODE CARD -->
+    <section class="invitation-card" style="text-align: center;">
+      <h2 class="section-title">Dress Code</h2>
+      <p class="section-subtitle">Elegant & Romantic</p>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px;">
+        We encourage guests to dress in formal or semi-formal attire in our color palette:
+      </p>
+      
+      <div class="palette">
+        <div class="color-swatch" style="background-color: #e5b8b8;" title="Blush Rose"></div>
+        <div class="color-swatch" style="background-color: #c5a059;" title="Champagne Gold"></div>
+        <div class="color-swatch" style="background-color: #2c2523;" title="Midnight Charcoal"></div>
+        <div class="color-swatch" style="background-color: #e8d5b5;" title="Warm Cream"></div>
+      </div>
+    </section>
+
+    <!-- LOCATION CARD -->
+    <section class="invitation-card" style="text-align: center;">
+      <h2 class="section-title">The Venue</h2>
+      <p class="section-subtitle">Fayroz</p>
+      
+      <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 16px;">
+        Join us at Fayroz for a night of joy and celebration.
+      </p>
+
+      <a href="https://maps.google.com/?q=Fayroz" target="_blank" class="btn btn-primary">
+        <i class="fa-solid fa-diamond-turn-right"></i> Open In Google Maps
+      </a>
+    </section>
+
+    <!-- RSVP FORM CARD -->
+    <section class="invitation-card" id="rsvp">
+      <h2 class="section-title">RSVP</h2>
+      <p class="section-subtitle">Kindly respond by September 15, 2026</p>
+
+      <form id="rsvpForm" onsubmit="handleRSVP(event)">
+        <div class="form-group">
+          <label class="form-label" for="guestName">Your Full Name</label>
+          <input type="text" id="guestName" class="form-control" placeholder="e.g. John Doe" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Will you be attending?</label>
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="attending" value="yes" checked />
+              <div class="radio-custom"><i class="fa-regular fa-circle-check" style="margin-right: 6px;"></i> Joyfully Accept</div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="attending" value="no" />
+              <div class="radio-custom"><i class="fa-regular fa-circle-xmark" style="margin-right: 6px;"></i> Regretfully Decline</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="guestCount">Number of Guests</label>
+          <select id="guestCount" class="form-control">
+            <option value="1">1 Person</option>
+            <option value="2">2 Persons</option>
+            <option value="3">3 Persons</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="notes">Warm Wishes / Dietary Notes</label>
+          <textarea id="notes" rows="3" class="form-control" placeholder="Leave a sweet note for Salem & Wafaa..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          <i class="fa-regular fa-paper-plane"></i> Send RSVP
+        </button>
+      </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="serif-font" style="font-size: 1.3rem; color: var(--gold-dark); margin-bottom: 4px;">Salem & Wafaa</p>
+      <p>We cannot wait to celebrate with you!</p>
+    </footer>
+
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div id="modal" class="modal" onclick="closeLightbox()">
+    <img id="modalImg" src="" alt="Full view" />
+  </div>
+
+  <!-- Toast Confirmation -->
+  <div id="toast" class="toast">Thank you! Your RSVP has been received ✨</div>
+
+  <script>
+    // 1. COUNTDOWN SCRIPT (October 10, 2026 - 18:00:00)
+    const targetDate = new Date("October 10, 2026 18:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = String(days).padStart(2, '0');
+        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 2. BACKGROUND MUSIC CONTROLLER
+    const musicBtn = document.getElementById("musicToggle");
+    const bgMusic = document.getElementById("bgMusic");
+    let isPlaying = false;
+
+    musicBtn.addEventListener("click", () => {
+      if (!isPlaying) {
+        bgMusic.play().then(() => {
+          musicBtn.classList.add("playing");
+          isPlaying = true;
+        }).catch(err => console.log("Audio autoplay blocked by browser policy"));
+      } else {
+        bgMusic.pause();
+        musicBtn.classList.remove("playing");
+        isPlaying = false;
+      }
+    });
+
+    // 3. ADD TO CALENDAR SCRIPT (.ics download & Google Calendar link)
+    function addToCalendar() {
+      const title = encodeURIComponent("Salem & Wafaa's Engagement Celebration");
+      const location = encodeURIComponent("Fayroz Hall");
+      const details = encodeURIComponent("We invite you to celebrate our engagement! Looking forward to seeing you.");
+      const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261010T150000Z/20261010T210000Z&details=${details}&location=${location}`;
+      window.open(googleCalUrl, '_blank');
+    }
+
+    // 4. LIGHTBOX HANDLER
+    function openLightbox(src) {
+      document.getElementById("modalImg").src = src;
+      document.getElementById("modal").style.display = "flex";
+    }
+    function closeLightbox() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    // 5. RSVP SUBMISSION & CONFETTI
+    function handleRSVP(e) {
+      e.preventDefault();
+      
+      // Trigger romantic gold/rose confetti burst
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.7 },
+        colors: ['#c5a059', '#e5b8b8', '#ffffff']
+      });
+
+      // Show Toast Notification
+      const toast = document.getElementById("toast");
+      toast.className = "toast show";
+      setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 4000);
+
+      // Reset form
+      document.getElementById("rsvpForm").reset();
+    }
+  </script>
+</body>
+</html>

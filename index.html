@@ -28,7 +28,6 @@
       --rose-accent: #e5b3b3;
       --rose-subtle: #faf0f0;
       --whatsapp-green: #25D366;
-      --whatsapp-dark: #128C7E;
       --text-dark: #2a2421;
       --text-muted: #796e68;
       --shadow-luxury: 0 20px 45px rgba(197, 160, 89, 0.15), 0 8px 20px rgba(0, 0, 0, 0.04);
@@ -55,7 +54,6 @@
       position: relative;
     }
 
-    /* FALLING PETALS CANVAS */
     #petalCanvas {
       position: fixed;
       top: 0; left: 0;
@@ -64,7 +62,6 @@
       z-index: 50;
     }
 
-    /* AMBIENT GLOW */
     .ambient-glow {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -75,21 +72,19 @@
     }
 
     /* =========================================
-       1. INTRO OVERLAY / WAX SEAL ENVELOPE
+       1. INTRO OVERLAY / WAX SEAL
     ========================================= */
     #introOverlay {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background: #1a1615;
       background: radial-gradient(ellipse at 50% 50%, #2f2520, #141110);
       z-index: 9999;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 1.4s cubic-bezier(0.77, 0, 0.175, 1),
-                  transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+      transition: opacity 1.4s cubic-bezier(0.77, 0, 0.175, 1), transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
       padding: 20px;
       color: #fff;
       text-align: center;
@@ -120,7 +115,7 @@
     .seal-container {
       cursor: pointer;
       position: relative;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .wax-seal {
@@ -128,9 +123,7 @@
       height: 110px;
       border-radius: 50%;
       background: var(--gold-gradient);
-      box-shadow: 0 12px 35px rgba(197, 160, 89, 0.5),
-                  0 0 60px rgba(197, 160, 89, 0.3),
-                  inset 0 3px 6px rgba(255,255,255,0.5);
+      box-shadow: 0 12px 35px rgba(197, 160, 89, 0.5), 0 0 60px rgba(197, 160, 89, 0.3), inset 0 3px 6px rgba(255,255,255,0.5);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -138,34 +131,43 @@
       font-size: 2.2rem;
       color: #fff;
       border: 3px solid rgba(255, 255, 255, 0.35);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
       animation: sealPulse 2.5s infinite;
+      transition: transform 0.4s;
     }
 
-    .seal-container:hover .wax-seal,
-    .seal-container:active .wax-seal {
-      transform: scale(1.12);
-      box-shadow: 0 15px 40px rgba(197, 160, 89, 0.7), 0 0 80px rgba(197, 160, 89, 0.4);
+    .seal-container:hover .wax-seal {
+      transform: scale(1.1);
     }
 
     @keyframes sealPulse {
-      0%, 100% { box-shadow: 0 12px 35px rgba(197, 160, 89, 0.5), 0 0 40px rgba(197, 160, 89, 0.2); }
-      50% { box-shadow: 0 12px 45px rgba(197, 160, 89, 0.7), 0 0 70px rgba(197, 160, 89, 0.4); }
+      0%, 100% { box-shadow: 0 12px 35px rgba(197, 160, 89, 0.5); }
+      50% { box-shadow: 0 12px 45px rgba(197, 160, 89, 0.8), 0 0 70px rgba(197, 160, 89, 0.4); }
     }
 
     .intro-title {
       font-family: 'Aref Ruqaa', serif;
       font-size: 2.6rem;
       color: var(--gold-light);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       letter-spacing: 2px;
-      text-shadow: 0 2px 15px rgba(197, 160, 89, 0.4);
     }
 
     .intro-subtitle {
       font-size: 1rem;
-      color: rgba(255, 255, 255, 0.65);
-      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 12px;
+    }
+
+    /* VIP Personalization inside Intro */
+    .vip-intro-guest {
+      display: none;
+      background: rgba(197, 160, 89, 0.2);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      color: var(--gold-light);
+      margin-bottom: 22px;
     }
 
     .open-btn-hint {
@@ -174,18 +176,12 @@
       gap: 10px;
       padding: 12px 28px;
       border-radius: 30px;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(197, 160, 89, 0.45);
       color: var(--gold-light);
       font-size: 0.95rem;
-      letter-spacing: 1.5px;
       cursor: pointer;
       animation: hintBounce 2.5s infinite;
-      transition: background 0.3s;
-    }
-
-    .open-btn-hint:hover {
-      background: rgba(255, 255, 255, 0.12);
     }
 
     @keyframes hintBounce {
@@ -195,7 +191,7 @@
     }
 
     /* =========================================
-       2. FLOATING MUSIC PLAYER BAR
+       2. FLOATING MUSIC BAR
     ========================================= */
     .music-bar {
       position: fixed;
@@ -203,7 +199,6 @@
       left: 22px;
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
       border: var(--border-gold);
       border-radius: 40px;
       padding: 8px 18px 8px 10px;
@@ -213,19 +208,14 @@
       gap: 12px;
       z-index: 1000;
       cursor: pointer;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       opacity: 0;
       transform: translateY(20px);
+      transition: all 0.35s ease;
     }
 
     .music-bar.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    .music-bar:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(197, 160, 89, 0.25);
     }
 
     .music-disc {
@@ -238,28 +228,10 @@
       justify-content: center;
       color: white;
       font-size: 0.85rem;
-      flex-shrink: 0;
     }
 
     .music-bar.playing .music-disc {
       animation: spin 4s linear infinite;
-    }
-
-    .music-info {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
-
-    .music-title {
-      font-size: 0.78rem;
-      color: var(--text-dark);
-      font-weight: 600;
-    }
-
-    .music-artist {
-      font-size: 0.68rem;
-      color: var(--text-muted);
     }
 
     .sound-waves {
@@ -267,7 +239,6 @@
       align-items: flex-end;
       gap: 3px;
       height: 18px;
-      margin-right: 4px;
     }
 
     .wave-bar {
@@ -281,20 +252,12 @@
     .music-bar.playing .wave-bar:nth-child(2) { animation: wave 0.8s ease-in-out infinite 0.15s; }
     .music-bar.playing .wave-bar:nth-child(3) { animation: wave 0.8s ease-in-out infinite 0.3s; }
     .music-bar.playing .wave-bar:nth-child(4) { animation: wave 0.8s ease-in-out infinite 0.1s; }
-    .music-bar.playing .wave-bar:nth-child(5) { animation: wave 0.8s ease-in-out infinite 0.25s; }
 
-    @keyframes wave {
-      0%, 100% { height: 4px; }
-      50% { height: 18px; }
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+    @keyframes wave { 0%, 100% { height: 4px; } 50% { height: 18px; } }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     /* =========================================
-       3. MAIN LAYOUT
+       3. MAIN LAYOUT & CARDS
     ========================================= */
     .container {
       max-width: 520px;
@@ -305,8 +268,7 @@
     .reveal {
       opacity: 0;
       transform: translateY(40px);
-      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .reveal.active {
@@ -317,7 +279,6 @@
     .invitation-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
       border: var(--border-gold);
       border-radius: 26px;
       padding: 38px 22px;
@@ -327,8 +288,7 @@
       overflow: hidden;
     }
 
-    .invitation-card::before,
-    .invitation-card::after {
+    .invitation-card::before, .invitation-card::after {
       content: "✤";
       position: absolute;
       font-size: 0.85rem;
@@ -346,9 +306,7 @@
       animation: shimmer 3.5s linear infinite;
     }
 
-    @keyframes shimmer {
-      to { background-position: 200% center; }
-    }
+    @keyframes shimmer { to { background-position: 200% center; } }
 
     .section-title {
       font-family: 'Aref Ruqaa', serif;
@@ -365,12 +323,43 @@
       margin-bottom: 24px;
     }
 
-    /* =========================================
-       4. HERO CARD
-    ========================================= */
+    /* VIP Banner inside Hero */
+    .vip-guest-badge {
+      display: none;
+      background: linear-gradient(135deg, rgba(197, 160, 89, 0.15), rgba(229, 179, 179, 0.2));
+      border: 1px solid var(--gold-primary);
+      padding: 10px 18px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .vip-guest-badge .badge-title {
+      font-size: 0.8rem;
+      color: var(--gold-dark);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .vip-guest-badge .guest-name-highlight {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 1.45rem;
+      color: var(--text-dark);
+      font-weight: 700;
+      display: block;
+      margin-top: -2px;
+    }
+
+    .vip-seats-info {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* HERO */
     .hero {
       text-align: center;
-      padding: 42px 20px 36px;
+      padding: 38px 20px 34px;
     }
 
     .monogram-badge {
@@ -384,48 +373,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 22px;
+      margin: 0 auto 20px;
       background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(246,238,221,0.6));
-      box-shadow: 0 8px 25px rgba(197, 160, 89, 0.18);
-      position: relative;
-    }
-
-    .monogram-badge::after {
-      content: '';
-      position: absolute;
-      width: 98px;
-      height: 98px;
-      border: 1px dashed rgba(197, 160, 89, 0.35);
-      border-radius: 50%;
-      animation: spin 20s linear infinite;
     }
 
     .quran-verse {
       font-family: 'Amiri', serif;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       color: var(--gold-dark);
       margin-bottom: 14px;
       line-height: 1.75;
-      padding: 0 10px;
-    }
-
-    .ornament-line {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 18px auto;
-      color: var(--gold-primary);
-    }
-
-    .ornament-line span {
-      display: inline-block;
-      width: 55px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-primary));
-    }
-    .ornament-line span:last-child {
-      background: linear-gradient(270deg, transparent, var(--gold-primary));
     }
 
     .couple-names {
@@ -449,7 +406,6 @@
       font-weight: 500;
       color: var(--text-dark);
       margin: 14px 0;
-      line-height: 1.9;
     }
 
     .event-meta-box {
@@ -458,7 +414,6 @@
       border-radius: 18px;
       padding: 18px 14px;
       margin: 22px 0;
-      position: relative;
     }
 
     .event-meta-box .event-date {
@@ -468,19 +423,6 @@
       font-weight: 700;
     }
 
-    .event-meta-box .event-time {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .event-meta-box .event-venue {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-
-    /* Buttons */
     .btn-group {
       display: flex;
       flex-direction: column;
@@ -498,29 +440,11 @@
       font-size: 0.98rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.35s ease;
       cursor: pointer;
       border: none;
       width: 100%;
       font-family: 'Tajawal', sans-serif;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -60%;
-      width: 30px;
-      height: 200%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: rotate(25deg);
-      transition: left 0.6s;
-    }
-
-    .btn:hover::after {
-      left: 120%;
     }
 
     .btn-primary {
@@ -529,20 +453,10 @@
       box-shadow: 0 10px 25px rgba(197, 160, 89, 0.35);
     }
 
-    .btn-primary:hover {
-      box-shadow: 0 12px 30px rgba(197, 160, 89, 0.5);
-      transform: translateY(-2px);
-    }
-
     .btn-whatsapp {
       background: linear-gradient(135deg, #25D366, #128C7E);
       color: white;
       box-shadow: 0 10px 25px rgba(37, 211, 102, 0.35);
-    }
-
-    .btn-whatsapp:hover {
-      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
-      transform: translateY(-2px);
     }
 
     .btn-outline {
@@ -551,19 +465,11 @@
       color: var(--gold-dark);
     }
 
-    .btn-outline:hover {
-      background: rgba(197, 160, 89, 0.08);
-      transform: translateY(-2px);
-    }
-
-    /* =========================================
-       5. COUNTDOWN
-    ========================================= */
+    /* COUNTDOWN */
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      margin-top: 10px;
     }
 
     .time-box {
@@ -572,8 +478,6 @@
       border-radius: 16px;
       padding: 14px 4px;
       text-align: center;
-      box-shadow: 0 6px 15px rgba(197, 160, 89, 0.08);
-      transition: transform 0.3s;
     }
 
     .time-val {
@@ -590,19 +494,7 @@
       margin-top: 6px;
     }
 
-    .time-val.flip {
-      animation: flipNum 0.5s ease;
-    }
-
-    @keyframes flipNum {
-      0% { transform: rotateX(0); }
-      50% { transform: rotateX(90deg); opacity: 0.5; }
-      100% { transform: rotateX(0); }
-    }
-
-    /* =========================================
-       6. TIMELINE
-    ========================================= */
+    /* TIMELINE */
     .timeline {
       position: relative;
       padding: 10px 0;
@@ -623,53 +515,15 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 28px;
-      position: relative;
     }
 
-    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-content { width: 44%; text-align: left; }
+    .timeline-item:nth-child(even) .timeline-content { text-align: right; order: 2; }
+    .timeline-time { font-family: 'Amiri', serif; font-weight: 700; color: var(--gold-dark); font-size: 1.35rem; }
+    .timeline-title { font-size: 0.92rem; font-weight: 500; color: var(--text-dark); }
+    .timeline-dot { width: 16px; height: 16px; background: var(--bg-cream); border: 3px solid var(--gold-primary); border-radius: 50%; z-index: 2; }
 
-    .timeline-content {
-      width: 44%;
-      text-align: left;
-    }
-
-    .timeline-item:nth-child(even) .timeline-content {
-      text-align: right;
-      order: 2;
-    }
-
-    .timeline-time {
-      font-family: 'Amiri', serif;
-      font-weight: 700;
-      color: var(--gold-dark);
-      font-size: 1.35rem;
-    }
-
-    .timeline-title {
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--text-dark);
-    }
-
-    .timeline-icon {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .timeline-dot {
-      width: 16px;
-      height: 16px;
-      background: var(--bg-cream);
-      border: 3px solid var(--gold-primary);
-      border-radius: 50%;
-      z-index: 2;
-      box-shadow: 0 0 12px rgba(197, 160, 89, 0.4);
-    }
-
-    /* =========================================
-       7. GALLERY
-    ========================================= */
+    /* GALLERY */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -685,89 +539,9 @@
       cursor: pointer;
     }
 
-    .gallery-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    .gallery-img { width: 100%; height: 100%; object-fit: cover; }
 
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
-      padding: 12px;
-      color: white;
-      font-size: 0.8rem;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    .gallery-item:hover .gallery-img {
-      transform: scale(1.08);
-    }
-
-    .gallery-item:hover .gallery-overlay {
-      opacity: 1;
-    }
-
-    /* Lightbox */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(18, 14, 13, 0.94);
-      backdrop-filter: blur(12px);
-      z-index: 10000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .modal.open {
-      display: flex;
-      animation: modalFade 0.4s ease;
-    }
-
-    @keyframes modalFade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .modal img {
-      max-width: 92%;
-      max-height: 82vh;
-      border-radius: 16px;
-      border: 2px solid rgba(197, 160, 89, 0.5);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-      animation: modalZoom 0.4s ease;
-    }
-
-    @keyframes modalZoom {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: white;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    /* =========================================
-       8. DRESS CODE
-    ========================================= */
+    /* PALETTE */
     .palette {
       display: flex;
       justify-content: center;
@@ -775,39 +549,13 @@
       margin: 22px 0 14px;
     }
 
-    .color-swatch-wrap {
-      text-align: center;
-    }
+    .color-swatch-wrap { text-align: center; }
+    .color-swatch { width: 46px; height: 46px; border-radius: 50%; border: 2.5px solid white; margin: 0 auto 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .color-label { font-size: 0.78rem; color: var(--text-muted); }
 
-    .color-swatch {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      border: 2.5px solid white;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-      margin: 0 auto 6px;
-    }
-
-    .color-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    /* =========================================
-       9. RSVP FORM
-    ========================================= */
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 0.88rem;
-      margin-bottom: 8px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
+    /* RSVP */
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 0.88rem; margin-bottom: 8px; color: var(--text-muted); font-weight: 500; }
     .form-control {
       width: 100%;
       padding: 14px 16px;
@@ -818,31 +566,11 @@
       font-size: 0.95rem;
       color: var(--text-dark);
       outline: none;
-      transition: all 0.35s;
     }
 
-    .form-control:focus {
-      border-color: var(--gold-primary);
-      box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.18);
-      transform: translateY(-1px);
-    }
-
-    .radio-group {
-      display: flex;
-      gap: 10px;
-    }
-
-    .radio-card {
-      flex: 1;
-      position: relative;
-    }
-
-    .radio-card input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-    }
-
+    .radio-group { display: flex; gap: 10px; }
+    .radio-card { flex: 1; position: relative; }
+    .radio-card input { position: absolute; opacity: 0; cursor: pointer; }
     .radio-custom {
       display: flex;
       align-items: center;
@@ -851,10 +579,8 @@
       background: rgba(255, 255, 255, 0.85);
       border: var(--border-gold);
       border-radius: 14px;
-      text-align: center;
       font-size: 0.9rem;
       cursor: pointer;
-      transition: all 0.3s;
     }
 
     .radio-card input:checked + .radio-custom {
@@ -862,14 +588,27 @@
       border-color: var(--gold-primary);
       color: var(--gold-dark);
       font-weight: 700;
-      box-shadow: 0 4px 15px rgba(197, 160, 89, 0.2);
     }
 
-    /* Toast */
+    /* Modal / Lightbox */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(18, 14, 13, 0.94);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal.open { display: flex; }
+    .modal img { max-width: 92%; max-height: 82vh; border-radius: 16px; border: 2px solid rgba(197, 160, 89, 0.5); }
+    .modal-close { position: absolute; top: 30px; left: 30px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.2); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
     .toast {
       visibility: hidden;
       min-width: 300px;
-      background: linear-gradient(135deg, #201a18, #2a2421);
+      background: #201a18;
       color: #fff;
       text-align: center;
       border-radius: 30px;
@@ -880,81 +619,40 @@
       bottom: 90px;
       transform: translateX(-50%);
       font-size: 0.95rem;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.35);
-      border: 1px solid rgba(197, 160, 89, 0.45);
     }
-
-    .toast.show {
-      visibility: visible;
-      animation: toastIn 0.5s ease, toastOut 0.5s ease 3.5s;
-    }
-
-    @keyframes toastIn {
-      from { bottom: 50px; opacity: 0; }
-      to { bottom: 90px; opacity: 1; }
-    }
-    @keyframes toastOut {
-      from { bottom: 90px; opacity: 1; }
-      to { bottom: 50px; opacity: 0; }
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 24px 0;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-    }
-
-    .footer-hearts {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .footer-hearts i {
-      color: var(--rose-accent);
-      font-size: 0.7rem;
-      animation: heartbeat 1.5s infinite;
-    }
-
-    .footer-hearts i:nth-child(2) { animation-delay: 0.3s; }
-    .footer-hearts i:nth-child(3) { animation-delay: 0.6s; }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
+    .toast.show { visibility: visible; }
+    footer { text-align: center; padding: 24px 0; color: var(--text-muted); font-size: 0.92rem; }
   </style>
 </head>
 <body>
 
-  <!-- Canvas for Falling Petals -->
   <canvas id="petalCanvas"></canvas>
   <div class="ambient-glow"></div>
 
-  <!-- AUDIO ELEMENT -->
+  <!-- AUDIO -->
   <audio id="bgMusic" loop preload="auto">
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
   <!-- =========================================
-       1. INTRO / WAX SEAL ENVELOPE
+       1. INTRO / WAX SEAL
   ========================================= -->
   <div id="introOverlay">
-    <div class="intro-sparkle" style="top: 15%; left: 20%; animation-delay: 0s;"></div>
-    <div class="intro-sparkle" style="top: 25%; left: 75%; animation-delay: 1.2s;"></div>
-    <div class="intro-sparkle" style="top: 60%; left: 10%; animation-delay: 0.6s;"></div>
-    <div class="intro-sparkle" style="top: 70%; left: 80%; animation-delay: 1.8s;"></div>
-    <div class="intro-sparkle" style="top: 40%; left: 50%; animation-delay: 2.4s;"></div>
-    <div class="intro-sparkle" style="top: 80%; left: 35%; animation-delay: 0.9s;"></div>
+    <div class="intro-sparkle" style="top: 15%; left: 20%;"></div>
+    <div class="intro-sparkle" style="top: 60%; left: 10%;"></div>
+    <div class="intro-sparkle" style="top: 70%; left: 80%;"></div>
 
     <div class="seal-container" onclick="openInvitation()">
       <div class="wax-seal">س & و</div>
     </div>
     <h1 class="intro-title">سالم & وفاء</h1>
     <p class="intro-subtitle">دعوة لحضور حفل الخطوبة المبارك</p>
+
+    <!-- Personalized name in intro if available -->
+    <div id="introGuestBadge" class="vip-intro-guest">
+      دعوة خاصة لـ: <span id="introGuestName"></span>
+    </div>
+
     <div class="open-btn-hint" onclick="openInvitation()">
       <i class="fa-regular fa-envelope-open"></i>
       <span>اضغط لفتح بطاقة الدعوة</span>
@@ -962,18 +660,15 @@
   </div>
 
   <!-- =========================================
-       2. FLOATING MUSIC BAR
+       2. MUSIC BAR
   ========================================= -->
   <div class="music-bar" id="musicToggle">
-    <div class="music-disc">
-      <i class="fa-solid fa-music"></i>
-    </div>
-    <div class="music-info">
-      <span class="music-title">Clair de Lune</span>
-      <span class="music-artist">Claude Debussy</span>
+    <div class="music-disc"><i class="fa-solid fa-music"></i></div>
+    <div style="display:flex; flex-direction:column; line-height:1.2;">
+      <span style="font-size:0.78rem; font-weight:600;">Clair de Lune</span>
+      <span style="font-size:0.68rem; color:var(--text-muted);">Claude Debussy</span>
     </div>
     <div class="sound-waves">
-      <div class="wave-bar"></div>
       <div class="wave-bar"></div>
       <div class="wave-bar"></div>
       <div class="wave-bar"></div>
@@ -990,15 +685,16 @@
     <section class="invitation-card hero reveal">
       <div class="monogram-badge">س & و</div>
       
+      <!-- PERSONALIZED VIP GUEST BANNER -->
+      <div id="vipBadge" class="vip-guest-badge">
+        <span class="badge-title">✨ دعوة خاصة ومميزة ✨</span>
+        <span id="vipGuestName" class="guest-name-highlight">ضيوفنا الكرام</span>
+        <span id="vipSeatsInfo" class="vip-seats-info"></span>
+      </div>
+
       <p class="quran-verse">
         ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾
       </p>
-
-      <div class="ornament-line">
-        <span></span>
-        <i class="fa-solid fa-heart" style="font-size: 0.75rem; color: var(--rose-accent);"></i>
-        <span></span>
-      </div>
 
       <h1 class="couple-names gold-shimmer-text">
         سالم
@@ -1010,23 +706,16 @@
 
       <div class="event-meta-box">
         <p class="event-date">السبت، ١٠ أكتوبر ٢٠٢٦</p>
-        <p class="event-time">الساعة 6:00 مساءً</p>
-        <p class="event-venue">
-          <i class="fa-solid fa-location-dot" style="color: var(--gold-primary); margin-left: 6px;"></i>
-          صالة فيروز
+        <p style="color:var(--text-muted);">الساعة 6:00 مساءً</p>
+        <p style="font-size:1.15rem; font-weight:600; margin-top:8px;">
+          <i class="fa-solid fa-location-dot" style="color: var(--gold-primary);"></i> صالة فيروز
         </p>
       </div>
 
       <div class="btn-group">
-        <a href="#rsvp" class="btn btn-primary">
-          <i class="fa-regular fa-envelope"></i> تأكيد الحضور
-        </a>
-        <button onclick="addToGoogleCalendar()" class="btn btn-outline">
-          <i class="fa-brands fa-google"></i> حفظ بتقويم Google
-        </button>
-        <button onclick="downloadICS()" class="btn btn-outline">
-          <i class="fa-regular fa-calendar-plus"></i> حفظ بتقويم iPhone / Outlook
-        </button>
+        <a href="#rsvp" class="btn btn-primary"><i class="fa-regular fa-envelope"></i> تأكيد الحضور</a>
+        <button onclick="addToGoogleCalendar()" class="btn btn-outline"><i class="fa-brands fa-google"></i> حفظ بتقويم Google</button>
+        <button onclick="downloadICS()" class="btn btn-outline"><i class="fa-regular fa-calendar-plus"></i> حفظ بتقويم iPhone / Outlook</button>
       </div>
     </section>
 
@@ -1036,130 +725,76 @@
       <p class="section-subtitle">إلى موعد لقائنا بكم</p>
       
       <div class="countdown-grid">
-        <div class="time-box">
-          <div class="time-val" id="days">00</div>
-          <div class="time-label">أيام</div>
-        </div>
-        <div class="time-box">
-          <div class="time-val" id="hours">00</div>
-          <div class="time-label">ساعات</div>
-        </div>
-        <div class="time-box">
-          <div class="time-val" id="minutes">00</div>
-          <div class="time-label">دقائق</div>
-        </div>
-        <div class="time-box">
-          <div class="time-val" id="seconds">00</div>
-          <div class="time-label">ثواني</div>
-        </div>
+        <div class="time-box"><div class="time-val" id="days">00</div><div class="time-label">أيام</div></div>
+        <div class="time-box"><div class="time-val" id="hours">00</div><div class="time-label">ساعات</div></div>
+        <div class="time-box"><div class="time-val" id="minutes">00</div><div class="time-label">دقائق</div></div>
+        <div class="time-box"><div class="time-val" id="seconds">00</div><div class="time-label">ثواني</div></div>
       </div>
     </section>
 
-    <!-- GALLERY CARD -->
+    <!-- GALLERY -->
     <section class="invitation-card reveal">
       <h2 class="section-title gold-shimmer-text">لحظاتنا الجميلة</h2>
       <p class="section-subtitle">ذكريات تسبق بداية المشوار</p>
       <div class="gallery-grid">
         <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800')">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800" class="gallery-img" alt="لحظة 1" loading="lazy">
-          <div class="gallery-overlay"><i class="fa-solid fa-expand"></i> عرض</div>
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800" class="gallery-img" alt="1">
         </div>
         <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800')">
-          <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800" class="gallery-img" alt="لحظة 2" loading="lazy">
-          <div class="gallery-overlay"><i class="fa-solid fa-expand"></i> عرض</div>
+          <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800" class="gallery-img" alt="2">
         </div>
         <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=800')">
-          <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=800" class="gallery-img" alt="لحظة 3" loading="lazy">
-          <div class="gallery-overlay"><i class="fa-solid fa-expand"></i> عرض</div>
+          <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=800" class="gallery-img" alt="3">
         </div>
         <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=800')">
-          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=800" class="gallery-img" alt="لحظة 4" loading="lazy">
-          <div class="gallery-overlay"><i class="fa-solid fa-expand"></i> عرض</div>
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=800" class="gallery-img" alt="4">
         </div>
       </div>
     </section>
 
-    <!-- ITINERARY CARD -->
+    <!-- TIMELINE -->
     <section class="invitation-card reveal">
       <h2 class="section-title gold-shimmer-text">فقرات الحفل</h2>
       <p class="section-subtitle">برنامج الأمسية المباركة</p>
 
       <div class="timeline">
         <div class="timeline-item">
-          <div class="timeline-content">
-            <div class="timeline-time">6:00 م</div>
-            <div class="timeline-title">الاستقبال والترحيب بالحضور</div>
-            <div class="timeline-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
-          </div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content"></div>
+          <div class="timeline-content"><div class="timeline-time">6:00 م</div><div class="timeline-title">الاستقبال والترحيب بالحضور</div></div>
+          <div class="timeline-dot"></div><div class="timeline-content"></div>
         </div>
-
         <div class="timeline-item">
-          <div class="timeline-content"></div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-time">7:30 م</div>
-            <div class="timeline-title">مراسم الخطوبة ولبس الدبل</div>
-            <div class="timeline-icon"><i class="fa-solid fa-ring"></i></div>
-          </div>
+          <div class="timeline-content"></div><div class="timeline-dot"></div>
+          <div class="timeline-content"><div class="timeline-time">7:30 م</div><div class="timeline-title">مراسم الخطوبة ولبس الدبل</div></div>
         </div>
-
         <div class="timeline-item">
-          <div class="timeline-content">
-            <div class="timeline-time">8:30 م</div>
-            <div class="timeline-title">مأدبة العشاء والتقاط الصور</div>
-            <div class="timeline-icon"><i class="fa-solid fa-camera"></i></div>
-          </div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content"></div>
+          <div class="timeline-content"><div class="timeline-time">8:30 م</div><div class="timeline-title">مأدبة العشاء والتقاط الصور</div></div>
+          <div class="timeline-dot"></div><div class="timeline-content"></div>
         </div>
       </div>
     </section>
 
-    <!-- DRESS CODE CARD -->
+    <!-- DRESS CODE -->
     <section class="invitation-card reveal" style="text-align: center;">
       <h2 class="section-title gold-shimmer-text">الزي المقترح</h2>
       <p class="section-subtitle">أناقة وألوان راقية</p>
-      <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 10px;">
-        يسعدنا تألقكم بأزياء رسمية تتناغم مع لوحة ألوان الحفل
-      </p>
-      
       <div class="palette">
-        <div class="color-swatch-wrap">
-          <div class="color-swatch" style="background-color: #e5b3b3;"></div>
-          <div class="color-label">وردي</div>
-        </div>
-        <div class="color-swatch-wrap">
-          <div class="color-swatch" style="background-color: #c5a059;"></div>
-          <div class="color-label">ذهبي</div>
-        </div>
-        <div class="color-swatch-wrap">
-          <div class="color-swatch" style="background-color: #2a2421;"></div>
-          <div class="color-label">كلاسيكي</div>
-        </div>
-        <div class="color-swatch-wrap">
-          <div class="color-swatch" style="background-color: #f6eedd;"></div>
-          <div class="color-label">عاجي</div>
-        </div>
+        <div class="color-swatch-wrap"><div class="color-swatch" style="background-color: #e5b3b3;"></div><div class="color-label">وردي</div></div>
+        <div class="color-swatch-wrap"><div class="color-swatch" style="background-color: #c5a059;"></div><div class="color-label">ذهبي</div></div>
+        <div class="color-swatch-wrap"><div class="color-swatch" style="background-color: #2a2421;"></div><div class="color-label">كلاسيكي</div></div>
+        <div class="color-swatch-wrap"><div class="color-swatch" style="background-color: #f6eedd;"></div><div class="color-label">عاجي</div></div>
       </div>
     </section>
 
-    <!-- VENUE LOCATION CARD -->
+    <!-- LOCATION -->
     <section class="invitation-card reveal" style="text-align: center;">
       <h2 class="section-title gold-shimmer-text">موقع الحفل</h2>
       <p class="section-subtitle">صالة فيروز</p>
-      
-      <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 20px;">
-        حضوركم تاج فرحتنا ويسعدنا مشاركتكم لنا هذا اليوم البهيج
-      </p>
-
       <a href="https://maps.google.com/?q=صالة+فيروز" target="_blank" class="btn btn-primary">
         <i class="fa-solid fa-location-dot"></i> فتح الموقع في خرائط Google
       </a>
     </section>
 
-    <!-- RSVP FORM CARD (WHATSAPP INTEGRATED) -->
+    <!-- RSVP (WHATSAPP + GUEST LIMIT) -->
     <section class="invitation-card reveal" id="rsvp">
       <h2 class="section-title gold-shimmer-text">تأكيد الحضور</h2>
       <p class="section-subtitle">يرجى تأكيد الحضور قبل 15 سبتمبر 2026</p>
@@ -1175,27 +810,19 @@
           <div class="radio-group">
             <label class="radio-card">
               <input type="radio" name="attending" value="yes" checked />
-              <div class="radio-custom">
-                <i class="fa-regular fa-circle-check" style="margin-left: 6px;"></i> يشرفني الحضور
-              </div>
+              <div class="radio-custom"><i class="fa-regular fa-circle-check" style="margin-left: 6px;"></i> يشرفني الحضور</div>
             </label>
             <label class="radio-card">
               <input type="radio" name="attending" value="no" />
-              <div class="radio-custom">
-                <i class="fa-regular fa-circle-xmark" style="margin-left: 6px;"></i> أعتذر بكل ود
-              </div>
+              <div class="radio-custom"><i class="fa-regular fa-circle-xmark" style="margin-left: 6px;"></i> أعتذر بكل ود</div>
             </label>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="guestCount">عدد المرافقين</label>
+          <label class="form-label" for="guestCount">عدد الحضور / المقاعد</label>
           <select id="guestCount" class="form-control">
-            <option value="1">شخص واحد</option>
-            <option value="2">شخصين</option>
-            <option value="3">3 أشخاص</option>
-            <option value="4">4 أشخاص</option>
-            <option value="5">5 أشخاص</option>
+            <!-- سيتم توليد الخيارات ديناميكياً حسب الرابط -->
           </select>
         </div>
 
@@ -1212,47 +839,75 @@
 
     <!-- FOOTER -->
     <footer class="reveal">
-      <p style="font-family: 'Aref Ruqaa', serif; font-size: 2rem; color: var(--gold-dark); margin-bottom: 4px;">
-        سالم & وفاء
-      </p>
-      <p>عقبال الفرحة الكبرى بحضوركم جميعاً</p>
-      <div class="footer-hearts">
-        <i class="fa-solid fa-heart"></i>
-        <i class="fa-solid fa-heart"></i>
-        <i class="fa-solid fa-heart"></i>
-      </div>
+      <p style="font-family: 'Aref Ruqaa', serif; font-size: 2rem; color: var(--gold-dark);">سالم & وفاء</p>
+      <p>عقبال الفرحة الكبرى بحضوركم جميعاً ✨</p>
     </footer>
 
   </main>
 
-  <!-- LIGHTBOX MODAL -->
   <div id="modal" class="modal">
-    <div class="modal-close" onclick="closeLightbox()">
-      <i class="fa-solid fa-xmark"></i>
-    </div>
+    <div class="modal-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></div>
     <img id="modalImg" src="" alt="عرض كامل" />
   </div>
 
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="toast">جاري فتح واتساب لإرسال تأكيدك ✨</div>
+  <div id="toast" class="toast">جاري فتح واتساب لتأكيد حضورك ✨</div>
 
-  <!-- =========================================
-       JAVASCRIPT
-  ========================================= -->
   <script>
     // ====================================================
-    // ⭐ ضع رقم هاتفك هنا مع مفتاح الدولة (بدون + أو 00) ⭐
-    // مثال: 966500000000 أو 201000000000 أو 971500000000
+    // ⭐ رقم هاتفك لواتساب (مفتاح الدولة بدون + أو 00) ⭐
     // ====================================================
     const WHATSAPP_PHONE_NUMBER = "96170041203"; 
 
+    // ====================================================
+    // 1. قراءة بيانات الضيف والعدد من الرابط (URL Params)
+    // ====================================================
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestNameParam = urlParams.get('to') || urlParams.get('name');
+    const guestLimitParam = parseInt(urlParams.get('guests') || urlParams.get('max'));
 
+    // تطبيق التخصيص إذا كان الاسم موجوداً بالرابط
+    if (guestNameParam) {
+      const cleanName = decodeURIComponent(guestNameParam).replace(/\+/g, ' ');
+      
+      // إظهار الاسم في غلاف البداية
+      document.getElementById('introGuestBadge').style.display = 'inline-block';
+      document.getElementById('introGuestName').innerText = cleanName;
+
+      // إظهار بطاقة الـ VIP في الصفحة
+      document.getElementById('vipBadge').style.display = 'block';
+      document.getElementById('vipGuestName').innerText = cleanName;
+      
+      // ملء حقل الاسم في النموذج تلقائياً
+      document.getElementById('guestName').value = cleanName;
+    }
+
+    // توليد خيارات عدد الضيوف في القائمة (تقييد العدد)
+    const guestSelect = document.getElementById('guestCount');
+    const maxAllowedGuests = (guestLimitParam && guestLimitParam > 0) ? guestLimitParam : 5;
+
+    // كتابة توضيح عدد المقاعد في بطاقة الترحيب
+    if (guestLimitParam && guestLimitParam > 0) {
+      document.getElementById('vipSeatsInfo').innerText = `(الدعوة مخصصة لـ ${maxAllowedGuests === 1 ? 'شخص واحد' : maxAllowedGuests === 2 ? 'شخصين' : maxAllowedGuests + ' أشخاص'})`;
+    }
+
+    // بناء خيارات الـ Dropdown
+    guestSelect.innerHTML = '';
+    for (let i = 1; i <= maxAllowedGuests; i++) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.innerText = (i === 1) ? "شخص واحد" : (i === 2) ? "شخصين" : `${i} أشخاص`;
+      if (i === maxAllowedGuests) opt.selected = true; // اختيار الحد الأقصى افتراضياً
+      guestSelect.appendChild(opt);
+    }
+
+    // ====================================================
+    // 2. الصوت والافتتاح
+    // ====================================================
     const bgMusic = document.getElementById("bgMusic");
     const musicToggle = document.getElementById("musicToggle");
     let isPlaying = false;
     let invitationOpened = false;
 
-    // 1. OPEN INVITATION & PLAY MUSIC
     function openInvitation() {
       if (invitationOpened) return;
       invitationOpened = true;
@@ -1277,12 +932,7 @@
         });
       }
 
-      confetti({
-        particleCount: 70,
-        spread: 85,
-        origin: { y: 0.55 },
-        colors: ['#c5a059', '#e5b3b3', '#ffffff', '#dfba73']
-      });
+      confetti({ particleCount: 70, spread: 85, origin: { y: 0.55 }, colors: ['#c5a059', '#e5b3b3', '#ffffff'] });
     }
 
     function retryPlay() {
@@ -1295,196 +945,109 @@
 
     function fadeInVolume() {
       let vol = 0;
-      const fadeInterval = setInterval(() => {
+      const fade = setInterval(() => {
         vol += 0.02;
-        if (vol >= 0.75) {
-          bgMusic.volume = 0.75;
-          clearInterval(fadeInterval);
-        } else {
-          bgMusic.volume = vol;
-        }
+        if (vol >= 0.75) { bgMusic.volume = 0.75; clearInterval(fade); }
+        else bgMusic.volume = vol;
       }, 60);
     }
 
-    function fadeOutVolume(callback) {
+    function fadeOutVolume() {
       let vol = bgMusic.volume;
-      const fadeInterval = setInterval(() => {
+      const fade = setInterval(() => {
         vol -= 0.03;
-        if (vol <= 0) {
-          bgMusic.volume = 0;
-          bgMusic.pause();
-          clearInterval(fadeInterval);
-          if (callback) callback();
-        } else {
-          bgMusic.volume = vol;
-        }
+        if (vol <= 0) { bgMusic.volume = 0; bgMusic.pause(); clearInterval(fade); }
+        else bgMusic.volume = vol;
       }, 50);
     }
 
     musicToggle.addEventListener("click", () => {
-      if (!isPlaying) {
-        bgMusic.play().then(() => {
-          isPlaying = true;
-          musicToggle.classList.add("playing");
-          fadeInVolume();
-        });
-      } else {
-        isPlaying = false;
-        musicToggle.classList.remove("playing");
-        fadeOutVolume();
-      }
+      if (!isPlaying) { bgMusic.play().then(() => { isPlaying = true; musicToggle.classList.add("playing"); fadeInVolume(); }); }
+      else { isPlaying = false; musicToggle.classList.remove("playing"); fadeOutVolume(); }
     });
 
-    // 2. FALLING PETALS CANVAS
+    // ====================================================
+    // 3. بتلات الورد
+    // ====================================================
     const canvas = document.getElementById('petalCanvas');
     const ctx = canvas.getContext('2d');
-    let W, H;
-
-    function resizeCanvas() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    let W = canvas.width = window.innerWidth, H = canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
 
     const petals = [];
-    const TOTAL_PETALS = 30;
-    const petalColors = [
-      'rgba(229, 179, 179, 0.55)', 'rgba(229, 179, 179, 0.35)',
-      'rgba(197, 160, 89, 0.45)', 'rgba(197, 160, 89, 0.28)',
-      'rgba(223, 186, 115, 0.4)', 'rgba(255, 240, 207, 0.5)'
-    ];
-
-    for (let i = 0; i < TOTAL_PETALS; i++) petals.push(createPetal());
-
-    function createPetal() {
-      return {
-        x: Math.random() * W,
-        y: Math.random() * -H,
-        size: Math.random() * 10 + 5,
-        speedY: Math.random() * 0.8 + 0.3,
-        speedX: Math.random() * 0.6 - 0.3,
-        rotation: Math.random() * 360,
-        rotSpeed: Math.random() * 2 - 1,
-        wobble: Math.random() * 0.5 + 0.3,
-        wobbleSpeed: Math.random() * 0.02 + 0.01,
-        wobbleOffset: Math.random() * Math.PI * 2,
-        color: petalColors[Math.floor(Math.random() * petalColors.length)],
-        opacity: Math.random() * 0.5 + 0.3
-      };
-    }
-
-    function drawPetal(p) {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate((p.rotation * Math.PI) / 180);
-      ctx.globalAlpha = p.opacity;
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(p.size * 0.6, -p.size, p.size, 0);
-      ctx.quadraticCurveTo(p.size * 0.6, p.size * 0.6, 0, 0);
-      ctx.fill();
-      ctx.restore();
+    for (let i = 0; i < 28; i++) {
+      petals.push({
+        x: Math.random() * W, y: Math.random() * -H, size: Math.random() * 9 + 5,
+        speedY: Math.random() * 0.8 + 0.3, speedX: Math.random() * 0.6 - 0.3,
+        rotation: Math.random() * 360, rotSpeed: Math.random() * 2 - 1,
+        color: Math.random() > 0.4 ? 'rgba(229, 179, 179, 0.45)' : 'rgba(197, 160, 89, 0.35)'
+      });
     }
 
     function animatePetals() {
       ctx.clearRect(0, 0, W, H);
       petals.forEach(p => {
-        drawPetal(p);
-        p.y += p.speedY;
-        p.x += p.speedX + Math.sin(p.y * p.wobbleSpeed + p.wobbleOffset) * p.wobble;
-        p.rotation += p.rotSpeed;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(p.size * 0.6, -p.size, p.size, 0);
+        ctx.quadraticCurveTo(p.size * 0.6, p.size * 0.6, 0, 0);
+        ctx.fill();
+        ctx.restore();
+
+        p.y += p.speedY; p.x += p.speedX; p.rotation += p.rotSpeed;
         if (p.y > H + 20) { p.y = -20; p.x = Math.random() * W; }
-        if (p.x > W + 20) p.x = -20;
-        if (p.x < -20) p.x = W + 20;
       });
       requestAnimationFrame(animatePetals);
     }
     animatePetals();
 
-    // 3. COUNTDOWN TIMER
+    // ====================================================
+    // 4. العداد التنازلي
+    // ====================================================
     const TARGET = new Date("October 10, 2026 18:00:00").getTime();
-    let prevVals = { days: '', hours: '', minutes: '', seconds: '' };
-
     function updateCountdown() {
-      const now = Date.now();
-      const diff = TARGET - now;
+      const diff = TARGET - Date.now();
       if (diff <= 0) return;
-
-      const d = String(Math.floor(diff / 86400000)).padStart(2, '0');
-      const h = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-      const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-      const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-
-      updateWithFlip("days", d);
-      updateWithFlip("hours", h);
-      updateWithFlip("minutes", m);
-      updateWithFlip("seconds", s);
-    }
-
-    function updateWithFlip(id, newVal) {
-      const el = document.getElementById(id);
-      if (prevVals[id] !== newVal) {
-        el.innerText = newVal;
-        el.classList.add('flip');
-        setTimeout(() => el.classList.remove('flip'), 500);
-        prevVals[id] = newVal;
-      }
+      document.getElementById("days").innerText = String(Math.floor(diff / 86400000)).padStart(2, '0');
+      document.getElementById("hours").innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
     }
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 4. SCROLL REVEAL
+    // ====================================================
+    // 5. التقويم والتأثيرات
+    // ====================================================
     const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
     }, { threshold: 0.12 });
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // 5. CALENDARS
     function addToGoogleCalendar() {
-      const title = encodeURIComponent("حفل خطوبة سالم ووفاء 💍");
-      const location = encodeURIComponent("صالة فيروز");
-      const details = encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحة خطوبتنا في صالة فيروز.");
-      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261010T150000Z/20261010T210000Z&details=${details}&location=${location}`;
+      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent("حفل خطوبة سالم ووفاء 💍")}&dates=20261010T150000Z/20261010T210000Z&details=${encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحتنا")}&location=${encodeURIComponent("صالة فيروز")}`;
       window.open(url, '_blank');
     }
 
     function downloadICS() {
-      const icsContent = [
-        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Salem & Wafaa//Engagement//AR',
-        'BEGIN:VEVENT', 'DTSTART:20261010T150000Z', 'DTEND:20261010T210000Z',
-        'SUMMARY:حفل خطوبة سالم ووفاء 💍', 'LOCATION:صالة فيروز', 'STATUS:CONFIRMED',
-        'END:VEVENT', 'END:VCALENDAR'
-      ].join('\r\n');
-      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'salem-wafaa-engagement.ics';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:20261010T150000Z\r\nDTEND:20261010T210000Z\r\nSUMMARY:حفل خطوبة سالم ووفاء 💍\r\nLOCATION:صالة فيروز\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'salem-wafaa-engagement.ics';
+      a.click();
     }
 
-    // 6. LIGHTBOX
-    function openLightbox(src) {
-      const modal = document.getElementById("modal");
-      document.getElementById("modalImg").src = src;
-      modal.classList.add("open");
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      const modal = document.getElementById("modal");
-      modal.classList.remove("open");
-      document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+    function openLightbox(src) { document.getElementById("modalImg").src = src; document.getElementById("modal").classList.add("open"); }
+    function closeLightbox() { document.getElementById("modal").classList.remove("open"); }
 
     // ====================================================
-    // 7. RSVP FORM SUBMISSION (WHATSAPP REDIRECT)
+    // 6. إرسال RSVP إلى واتساب
     // ====================================================
     function handleRSVP(e) {
       e.preventDefault();
@@ -1495,38 +1058,26 @@
       const guests = document.getElementById('guestCount').value;
       const notes = document.getElementById('notes').value.trim();
 
-      // تنسيق الرسالة المرسلة لواتساب
       const message = 
 `*تأكيد حضور حفل خطوبة سالم ووفاء* 💍
 ━━━━━━━━━━━━━━━━━━━━
 👤 *الاسم:* ${name}
 ✨ *الحالة:* ${attendingText}
-👥 *عدد الحضور:* ${guests}
+👥 *عدد الحضور المؤكد:* ${guests} ${guests == 1 ? 'شخص' : 'أشخاص'}
 💌 *التهنئة / ملاحظات:* ${notes ? notes : 'لا يوجد'}
 ━━━━━━━━━━━━━━━━━━━━
 *تاريخ الحفل:* السبت ١٠ أكتوبر ٢٠٢٦
 *المكان:* صالة فيروز`;
 
-      // رابط واتساب الرسمي
       const whatsappURL = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
 
-      // إطلاق القصاصات
-      confetti({
-        particleCount: 100,
-        spread: 80,
-        origin: { y: 0.65 },
-        colors: ['#25D366', '#c5a059', '#e5b3b3', '#ffffff']
-      });
+      confetti({ particleCount: 100, spread: 80, origin: { y: 0.65 }, colors: ['#25D366', '#c5a059', '#e5b3b3', '#ffffff'] });
 
-      // إظهار التنبيه
       const toast = document.getElementById("toast");
       toast.className = "toast show";
       setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3500);
 
-      // فتح واتساب بعد ثانية صغيرة لإتاحة رؤية التأثير
-      setTimeout(() => {
-        window.open(whatsappURL, '_blank');
-      }, 800);
+      setTimeout(() => { window.open(whatsappURL, '_blank'); }, 800);
     }
   </script>
 </body>

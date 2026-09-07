@@ -2,10 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>حفل خطوبة سالم ووفاء — Salem & Wafaa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>حفل خطوبة سالم ووفاء | Salem & Wafaa</title>
 
-  <!-- الخطوط العربية من Google Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -18,24 +18,26 @@
 
   <style>
     :root {
-      --bg-cream: #faf7f2;
-      --card-bg: rgba(255, 255, 255, 0.90);
+      --bg-cream: #fbf8f3;
+      --card-bg: rgba(255, 255, 255, 0.88);
       --gold-primary: #c5a059;
-      --gold-light: #f3ebd8;
-      --gold-dark: #9a7632;
-      --rose-accent: #e5b8b8;
-      --rose-subtle: #f8eeee;
-      --text-dark: #2c2523;
-      --text-muted: #726763;
-      --shadow-soft: 0 15px 35px rgba(197, 160, 89, 0.12), 0 5px 15px rgba(0, 0, 0, 0.04);
-      --border-gold: 1px solid rgba(197, 160, 89, 0.28);
+      --gold-gradient: linear-gradient(135deg, #dfba73 0%, #c5a059 50%, #9e7831 100%);
+      --gold-shimmer: linear-gradient(90deg, #c5a059 0%, #fff0cf 50%, #c5a059 100%);
+      --gold-light: #f6eedd;
+      --gold-dark: #8c6a28;
+      --rose-accent: #e5b3b3;
+      --rose-subtle: #faf0f0;
+      --text-dark: #2a2421;
+      --text-muted: #796e68;
+      --shadow-luxury: 0 20px 45px rgba(197, 160, 89, 0.15), 0 8px 20px rgba(0, 0, 0, 0.04);
+      --border-gold: 1px solid rgba(197, 160, 89, 0.32);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -47,62 +49,246 @@
       position: relative;
     }
 
-    /* خلفية متدرجة ناعمة */
-    body::before {
-      content: "";
+    /* Falling Petals Canvas */
+    #petalCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    /* Ambient Background Glow */
+    .ambient-glow {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      background: radial-gradient(circle at 15% 20%, rgba(229, 184, 184, 0.25), transparent 40%),
-                  radial-gradient(circle at 85% 80%, rgba(197, 160, 89, 0.18), transparent 45%);
+      background: radial-gradient(circle at 10% 15%, rgba(229, 179, 179, 0.3), transparent 45%),
+                  radial-gradient(circle at 90% 85%, rgba(197, 160, 89, 0.22), transparent 50%);
       z-index: -1;
       pointer-events: none;
     }
 
-    /* زر الموسيقى العائم */
-    .music-btn {
+    /* =========================================
+       1. LUXURY ENVELOPE / INTRO OVERLAY
+    ========================================= */
+    #introOverlay {
       position: fixed;
-      bottom: 24px;
-      left: 24px; /* لليسار في الواجهة العربية */
-      width: 52px;
-      height: 52px;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #1a1615 radial-gradient(circle at 50% 50%, #2f2520, #141110);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+    }
+
+    #introOverlay.opened {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .seal-container {
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 24px;
+      animation: pulseGlow 2.5s infinite;
+    }
+
+    .wax-seal {
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      background: white;
-      border: var(--border-gold);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      background: var(--gold-gradient);
+      box-shadow: 0 10px 30px rgba(197, 160, 89, 0.5), inset 0 2px 4px rgba(255,255,255,0.6);
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 2.2rem;
+      color: #fff;
+      border: 3px solid rgba(255, 255, 255, 0.35);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .seal-container:hover .wax-seal {
+      transform: scale(1.08);
+    }
+
+    .intro-title {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 2.4rem;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .intro-subtitle {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 28px;
+    }
+
+    .open-btn-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      color: var(--gold-light);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(197, 160, 89, 0.3); }
+      50% { box-shadow: 0 0 38px rgba(197, 160, 89, 0.75); }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    /* =========================================
+       2. FLOATING MUSIC CONTROLLER
+    ========================================= */
+    .music-bar {
+      position: fixed;
+      bottom: 22px;
+      left: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border: var(--border-gold);
+      border-radius: 40px;
+      padding: 8px 16px 8px 10px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      align-items: center;
+      gap: 12px;
       z-index: 1000;
-      color: var(--gold-primary);
-      font-size: 1.2rem;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .music-btn.playing {
-      animation: rotate 5s linear infinite;
-      border-color: var(--gold-primary);
-      color: var(--gold-dark);
+    .music-bar:hover {
+      transform: translateY(-3px);
     }
 
-    @keyframes rotate {
+    .music-disc {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    .music-bar.playing .music-disc {
+      animation: spin 4s linear infinite;
+    }
+
+    /* Animated Sound Waves */
+    .sound-waves {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+    }
+
+    .wave-bar {
+      width: 3px;
+      height: 4px;
+      background-color: var(--gold-dark);
+      border-radius: 2px;
+      transition: height 0.2s ease;
+    }
+
+    .music-bar.playing .wave-bar:nth-child(1) { animation: wave 1s ease-in-out infinite 0.1s; }
+    .music-bar.playing .wave-bar:nth-child(2) { animation: wave 1s ease-in-out infinite 0.3s; }
+    .music-bar.playing .wave-bar:nth-child(3) { animation: wave 1s ease-in-out infinite 0.2s; }
+    .music-bar.playing .wave-bar:nth-child(4) { animation: wave 1s ease-in-out infinite 0.4s; }
+
+    @keyframes wave {
+      0%, 100% { height: 4px; }
+      50% { height: 16px; }
+    }
+
+    @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    /* إطار التصميم للجوال */
+    /* =========================================
+       3. LAYOUT & CARDS
+    ========================================= */
     .container {
-      max-width: 540px;
+      max-width: 520px;
       margin: 0 auto;
-      padding: 24px 18px 80px;
+      padding: 24px 18px 90px;
     }
 
-    /* الخطوط المتخصصة */
-    .font-calligraphy {
-      font-family: 'Aref Ruqaa', serif;
+    /* Scroll Animation Base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .font-classic {
-      font-family: 'Amiri', serif;
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .invitation-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: var(--border-gold);
+      border-radius: 26px;
+      padding: 38px 22px;
+      box-shadow: var(--shadow-luxury);
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Corner Luxury Ornaments */
+    .invitation-card::before, .invitation-card::after {
+      content: "✤";
+      position: absolute;
+      font-size: 0.9rem;
+      color: rgba(197, 160, 89, 0.4);
+    }
+    .invitation-card::before { top: 12px; right: 14px; }
+    .invitation-card::after { bottom: 12px; left: 14px; }
+
+    /* Shimmer Gold Typography */
+    .gold-shimmer-text {
+      background: var(--gold-shimmer);
+      background-size: 200% auto;
+      color: #9a7632;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+      to { background-position: 200% center; }
     }
 
     .section-title {
@@ -110,64 +296,63 @@
       font-size: 2.2rem;
       font-weight: 700;
       text-align: center;
-      color: var(--gold-dark);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .section-subtitle {
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
       margin-bottom: 24px;
-      letter-spacing: 1px;
     }
 
-    /* بطاقة المحتوى */
-    .invitation-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: var(--border-gold);
-      border-radius: 24px;
-      padding: 36px 22px;
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 26px;
-      position: relative;
-    }
-
-    /* كرت البداية / الواجهة */
+    /* =========================================
+       4. HERO SECTION
+    ========================================= */
     .hero {
       text-align: center;
-      padding: 44px 20px 32px;
+      padding: 42px 20px 36px;
     }
 
-    .monogram {
+    .monogram-badge {
       font-family: 'Aref Ruqaa', serif;
-      font-size: 1.7rem;
+      font-size: 1.8rem;
       color: var(--gold-primary);
-      width: 76px;
-      height: 76px;
-      border: 1px solid var(--gold-primary);
+      width: 82px;
+      height: 82px;
+      border: 1.5px solid var(--gold-primary);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
-      background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(248,238,238,0.5));
+      background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(246,238,221,0.6));
+      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.15);
+      position: relative;
     }
 
-    .invitation-header {
-      font-size: 1rem;
-      color: var(--text-muted);
-      margin-bottom: 10px;
+    .monogram-badge::after {
+      content: '';
+      position: absolute;
+      width: 92px;
+      height: 92px;
+      border: 1px dashed rgba(197, 160, 89, 0.4);
+      border-radius: 50%;
+    }
+
+    .quran-verse {
+      font-family: 'Amiri', serif;
+      font-size: 1.05rem;
+      color: var(--gold-dark);
+      margin-bottom: 16px;
+      line-height: 1.7;
     }
 
     .couple-names {
       font-family: 'Aref Ruqaa', serif;
-      font-size: 3.4rem;
-      color: var(--gold-dark);
-      line-height: 1.3;
-      margin: 8px 0;
+      font-size: 3.5rem;
+      line-height: 1.25;
+      margin: 10px 0;
       font-weight: 700;
     }
 
@@ -180,51 +365,40 @@
     }
 
     .event-type {
-      font-family: 'Tajawal', sans-serif;
       font-size: 1.15rem;
       font-weight: 500;
       color: var(--text-dark);
       margin: 16px 0;
     }
 
-    .ornament {
-      width: 140px;
+    .ornament-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 22px auto;
+      color: var(--gold-primary);
+    }
+
+    .ornament-line span {
+      display: inline-block;
+      width: 50px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-      margin: 20px auto;
+      background: linear-gradient(90deg, transparent, var(--gold-primary));
+    }
+    .ornament-line span:last-child {
+      background: linear-gradient(270deg, transparent, var(--gold-primary));
     }
 
-    /* العداد التنازلي */
-    .countdown-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .time-box {
-      background: rgba(255, 255, 255, 0.95);
+    .event-meta-box {
+      background: rgba(255, 255, 255, 0.65);
       border: var(--border-gold);
-      border-radius: 14px;
-      padding: 12px 4px;
-      text-align: center;
+      border-radius: 18px;
+      padding: 16px;
+      margin: 20px 0;
     }
 
-    .time-val {
-      font-family: 'Amiri', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--gold-dark);
-      line-height: 1.1;
-    }
-
-    .time-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* الأزرار */
+    /* Buttons */
     .btn-group {
       display: flex;
       flex-direction: column;
@@ -237,12 +411,12 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 14px 22px;
+      padding: 15px 24px;
       border-radius: 30px;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
       border: none;
       width: 100%;
@@ -250,13 +424,13 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      background: var(--gold-gradient);
       color: white;
-      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+      box-shadow: 0 10px 25px rgba(197, 160, 89, 0.35);
     }
 
     .btn-primary:hover {
-      box-shadow: 0 10px 25px rgba(197, 160, 89, 0.45);
+      box-shadow: 0 12px 30px rgba(197, 160, 89, 0.5);
       transform: translateY(-2px);
     }
 
@@ -271,7 +445,43 @@
       transform: translateY(-2px);
     }
 
-    /* خط الزمن / البرنامج */
+    /* =========================================
+       5. COUNTDOWN
+    ========================================= */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .time-box {
+      background: rgba(255, 255, 255, 0.95);
+      border: var(--border-gold);
+      border-radius: 16px;
+      padding: 14px 4px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 6px 15px rgba(197, 160, 89, 0.08);
+    }
+
+    .time-val {
+      font-family: 'Amiri', serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      line-height: 1;
+    }
+
+    .time-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* =========================================
+       6. TIMELINE / SCHEDULE
+    ========================================= */
     .timeline {
       position: relative;
       padding: 10px 0;
@@ -280,10 +490,9 @@
     .timeline::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 50%;
+      top: 0; left: 50%;
       transform: translateX(-50%);
-      width: 1px;
+      width: 1.5px;
       height: 100%;
       background: linear-gradient(to bottom, transparent, var(--gold-primary), transparent);
     }
@@ -292,13 +501,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 26px;
       position: relative;
     }
 
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
+    .timeline-item:last-child { margin-bottom: 0; }
 
     .timeline-content {
       width: 44%;
@@ -318,65 +525,109 @@
     }
 
     .timeline-title {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 500;
       color: var(--text-dark);
     }
 
     .timeline-dot {
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       background: var(--bg-cream);
-      border: 2px solid var(--gold-primary);
+      border: 3px solid var(--gold-primary);
       border-radius: 50%;
       z-index: 2;
+      box-shadow: 0 0 10px rgba(197, 160, 89, 0.4);
     }
 
-    /* معرض الصور */
+    /* =========================================
+       7. GALLERY & LIGHTBOX
+    ========================================= */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
 
-    .gallery-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 14px;
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1;
       border: var(--border-gold);
       cursor: pointer;
-      transition: transform 0.3s ease;
     }
 
-    .gallery-img:hover {
-      transform: scale(1.03);
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* ألوان الزي */
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.08);
+    }
+
+    /* Lightbox Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(18, 14, 13, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal img {
+      max-width: 92%;
+      max-height: 82vh;
+      border-radius: 16px;
+      border: 2px solid rgba(197, 160, 89, 0.5);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+
+    /* =========================================
+       8. DRESS CODE & PALETTE
+    ========================================= */
     .palette {
       display: flex;
       justify-content: center;
       gap: 14px;
-      margin: 18px 0 10px;
+      margin: 20px 0 12px;
+    }
+
+    .color-swatch-wrap {
+      text-align: center;
     }
 
     .color-swatch {
-      width: 38px;
-      height: 38px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       border: 2px solid white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      margin: 0 auto 6px;
     }
 
-    /* نموذج تأكيد الحضور (RSVP) */
+    .color-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* =========================================
+       9. RSVP FORM
+    ========================================= */
     .form-group {
       margin-bottom: 18px;
     }
 
     .form-label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       margin-bottom: 8px;
       color: var(--text-muted);
       font-weight: 500;
@@ -384,20 +635,20 @@
 
     .form-control {
       width: 100%;
-      padding: 13px 16px;
+      padding: 14px 16px;
       background: rgba(255, 255, 255, 0.95);
       border: var(--border-gold);
-      border-radius: 12px;
+      border-radius: 14px;
       font-family: inherit;
       font-size: 0.95rem;
       color: var(--text-dark);
       outline: none;
-      transition: border-color 0.3s;
+      transition: all 0.3s;
     }
 
     .form-control:focus {
       border-color: var(--gold-primary);
-      box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+      box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
     }
 
     .radio-group {
@@ -420,12 +671,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 6px;
-      background: rgba(255, 255, 255, 0.7);
+      padding: 14px 6px;
+      background: rgba(255, 255, 255, 0.85);
       border: var(--border-gold);
-      border-radius: 12px;
+      border-radius: 14px;
       text-align: center;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.25s;
     }
@@ -435,55 +686,40 @@
       border-color: var(--gold-primary);
       color: var(--gold-dark);
       font-weight: 700;
+      box-shadow: 0 4px 12px rgba(197, 160, 89, 0.15);
     }
 
-    /* نافذة تكبير الصورة */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    .modal img {
-      max-width: 90%;
-      max-height: 80vh;
-      border-radius: 12px;
-      border: 2px solid white;
-    }
-
-    /* رسالة التأكيد */
+    /* Toast Notification */
     .toast {
       visibility: hidden;
-      min-width: 280px;
-      background-color: var(--text-dark);
+      min-width: 290px;
+      background-color: #201a18;
       color: #fff;
       text-align: center;
       border-radius: 30px;
-      padding: 14px 24px;
+      padding: 16px 28px;
       position: fixed;
-      z-index: 3000;
+      z-index: 10001;
       left: 50%;
       bottom: 90px;
       transform: translateX(-50%);
-      font-size: 0.9rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      font-size: 0.92rem;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+      border: 1px solid rgba(197, 160, 89, 0.4);
     }
+
     .toast.show {
       visibility: visible;
-      animation: fadein 0.5s, fadeout 0.5s 3.5s;
+      animation: toastFadeIn 0.5s, toastFadeOut 0.5s 3.5s;
     }
-    @keyframes fadein { from { bottom: 60px; opacity: 0; } to { bottom: 90px; opacity: 1; } }
-    @keyframes fadeout { from { bottom: 90px; opacity: 1; } to { bottom: 60px; opacity: 0; } }
 
-    /* الفوتر */
+    @keyframes toastFadeIn { from { bottom: 60px; opacity: 0; } to { bottom: 90px; opacity: 1; } }
+    @keyframes toastFadeOut { from { bottom: 90px; opacity: 1; } to { bottom: 60px; opacity: 0; } }
+
+    /* Footer */
     footer {
       text-align: center;
-      padding: 20px 0;
+      padding: 24px 0;
       color: var(--text-muted);
       font-size: 0.9rem;
     }
@@ -491,39 +727,77 @@
 </head>
 <body>
 
-  <!-- ملف الموسيقى (يمكن استبدال الرابط بأي أغنية رومانسية تناسبك) -->
-  <audio id="bgMusic" loop>
+  <!-- Floating Falling Petals Canvas -->
+  <canvas id="petalCanvas"></canvas>
+  <div class="ambient-glow"></div>
+
+  <!-- Background Music Element -->
+  <audio id="bgMusic" loop preload="auto">
     <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-moment-in-paris-1002.mp3" type="audio/mp3">
   </audio>
 
-  <!-- زر تشغيل وإيقاف الموسيقى -->
-  <div class="music-btn" id="musicToggle" title="تشغيل الموسيقى">
-    <i class="fa-solid fa-music"></i>
+  <!-- =========================================
+       1. OPENING INTERACTIVE ENVELOPE
+  ========================================= -->
+  <div id="introOverlay">
+    <div class="seal-container" onclick="openInvitation()">
+      <div class="wax-seal">س & و</div>
+    </div>
+    <h1 class="intro-title">سالم & وفاء</h1>
+    <p class="intro-subtitle">دعوة لحضور حفل الخطوبة المبارك</p>
+    <div class="open-btn-hint" onclick="openInvitation()">
+      <i class="fa-regular fa-envelope-open"></i>
+      <span>اضغط لفتح بطاقة الدعوة</span>
+    </div>
+  </div>
+
+  <!-- =========================================
+       2. FLOATING MUSIC BAR
+  ========================================= -->
+  <div class="music-bar" id="musicToggle" title="تشغيل / إيقاف الموسيقى">
+    <div class="music-disc">
+      <i class="fa-solid fa-music"></i>
+    </div>
+    <div class="sound-waves">
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+    </div>
   </div>
 
   <main class="container">
 
-    <!-- كرت الدعوة الرئيسي -->
-    <section class="invitation-card hero">
-      <div class="monogram">س & و</div>
-      <p class="invitation-header">بكل معاني الحب والتقدير</p>
+    <!-- =========================================
+         3. HERO CARD
+    ========================================= -->
+    <section class="invitation-card hero reveal">
+      <div class="monogram-badge">س & و</div>
       
-      <h1 class="couple-names">
+      <p class="quran-verse">
+        "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"
+      </p>
+
+      <div class="ornament-line">
+        <span></span>
+        <i class="fa-solid fa-heart" style="font-size: 0.8rem; color: var(--rose-accent);"></i>
+        <span></span>
+      </div>
+
+      <h1 class="couple-names gold-shimmer-text">
         سالم
         <span class="ampersand">و</span>
         وفاء
       </h1>
 
-      <p class="event-type">يتشرفان بدعوتكم لمشاركتهما الفرحة<br>بمناسبة حفل خطوبتهما المبارك</p>
+      <p class="event-type">يتشرفان بدعوتكم لمشاركتهما أجمل اللحظات<br>في حفل خطوبتهما</p>
 
-      <div class="ornament"></div>
-
-      <div style="margin: 20px 0;">
-        <p class="font-classic" style="font-size: 1.85rem; color: var(--gold-dark); font-weight: 700;">
+      <div class="event-meta-box">
+        <p style="font-family: 'Amiri', serif; font-size: 1.8rem; color: var(--gold-dark); font-weight: 700;">
           السبت، ١٠ أكتوبر ٢٠٢٦
         </p>
         <p style="font-size: 1rem; color: var(--text-muted); margin-top: 2px;">
-          الساعة السادسة مساءً (6:00 م)
+          الساعة 6:00 مساءً
         </p>
         <p style="font-size: 1.15rem; font-weight: 600; margin-top: 8px;">
           <i class="fa-solid fa-location-dot" style="color: var(--gold-primary); margin-left: 6px;"></i> قاعة فيروز
@@ -531,15 +805,17 @@
       </div>
 
       <div class="btn-group">
-        <a href="#rsvp" class="btn btn-primary"><i class="fa-regular fa-envelope-open"></i> تأكيد الحضور (RSVP)</a>
-        <button onclick="addToCalendar()" class="btn btn-outline"><i class="fa-regular fa-calendar-plus"></i> إضافة إلى التقويم</button>
+        <a href="#rsvp" class="btn btn-primary"><i class="fa-regular fa-envelope"></i> تأكيد الحضور (RSVP)</a>
+        <button onclick="addToCalendar()" class="btn btn-outline"><i class="fa-regular fa-calendar-check"></i> حفظ الموعد بالتقويم</button>
       </div>
     </section>
 
-    <!-- كرت العداد التنازلي -->
-    <section class="invitation-card">
-      <h2 class="section-title">العد التنازلي</h2>
-      <p class="section-subtitle">حتى نلتقي ونحتفل معاً</p>
+    <!-- =========================================
+         4. COUNTDOWN CARD
+    ========================================= -->
+    <section class="invitation-card reveal">
+      <h2 class="section-title gold-shimmer-text">العد التنازلي</h2>
+      <p class="section-subtitle">إلى موعد لقائنا بكم</p>
       
       <div class="countdown-grid">
         <div class="time-box">
@@ -561,28 +837,40 @@
       </div>
     </section>
 
-    <!-- كرت معرض الصور / حكايتنا -->
-    <section class="invitation-card">
-      <h2 class="section-title">لحظات لا تُنسى</h2>
-      <p class="section-subtitle">بداية حكايتنا الجميلة</p>
+    <!-- =========================================
+         5. GALLERY CARD
+    ========================================= -->
+    <section class="invitation-card reveal">
+      <h2 class="section-title gold-shimmer-text">لحظاتنا الجميلة</h2>
+      <p class="section-subtitle">ذكريات تسبق بداية المشوار</p>
       <div class="gallery-grid">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=700&auto=format&fit=crop" class="gallery-img" onclick="openLightbox(this.src)" alt="سالم ووفاء">
-        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=700&auto=format&fit=crop" class="gallery-img" onclick="openLightbox(this.src)" alt="سالم ووفاء">
-        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=700&auto=format&fit=crop" class="gallery-img" onclick="openLightbox(this.src)" alt="سالم ووفاء">
-        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=700&auto=format&fit=crop" class="gallery-img" onclick="openLightbox(this.src)" alt="سالم ووفاء">
+        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=700')">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=700" class="gallery-img" alt="لحظة 1">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=700')">
+          <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=700" class="gallery-img" alt="لحظة 2">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=700')">
+          <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?q=80&w=700" class="gallery-img" alt="لحظة 3">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=700')">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=700" class="gallery-img" alt="لحظة 4">
+        </div>
       </div>
     </section>
 
-    <!-- كرت برنامج الحفل -->
-    <section class="invitation-card">
-      <h2 class="section-title">برنامج الأمسية</h2>
-      <p class="section-subtitle">فقرات حفل الخطوبة</p>
+    <!-- =========================================
+         6. ITINERARY CARD
+    ========================================= -->
+    <section class="invitation-card reveal">
+      <h2 class="section-title gold-shimmer-text">فقرات الحفل</h2>
+      <p class="section-subtitle">برنامج الأمسية المباركة</p>
 
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-content">
             <div class="timeline-time">6:00 م</div>
-            <div class="timeline-title">استقبال الضيوف والترحيب</div>
+            <div class="timeline-title">الاستقبال والترحيب بالحضور</div>
           </div>
           <div class="timeline-dot"></div>
           <div class="timeline-content"></div>
@@ -593,14 +881,14 @@
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-time">7:30 م</div>
-            <div class="timeline-title">مراسم تلبيس الدبل</div>
+            <div class="timeline-title">مراسم الخطوبة ولبس الدبل</div>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-content">
             <div class="timeline-time">8:30 م</div>
-            <div class="timeline-title">العشاء والاحتفال</div>
+            <div class="timeline-title">مأدبة العشاء والتقاط الصور</div>
           </div>
           <div class="timeline-dot"></div>
           <div class="timeline-content"></div>
@@ -608,39 +896,57 @@
       </div>
     </section>
 
-    <!-- كرت الزي المقترح -->
-    <section class="invitation-card" style="text-align: center;">
-      <h2 class="section-title">الزي المقترح</h2>
-      <p class="section-subtitle">أناقة ورقي</p>
-      <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 8px;">
-        يسعدنا تألقكم بالزي الرسمي بألوان تتناغم مع لوحة الحفل:
+    <!-- =========================================
+         7. DRESS CODE
+    ========================================= -->
+    <section class="invitation-card reveal" style="text-align: center;">
+      <h2 class="section-title gold-shimmer-text">الزي المقترح</h2>
+      <p class="section-subtitle">أناقة وألوان راقية</p>
+      <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 10px;">
+        يسعدنا تألقكم بأزياء رسمية تتناغم مع لوحة ألوان الحفل:
       </p>
       
       <div class="palette">
-        <div class="color-swatch" style="background-color: #e5b8b8;" title="وردي ناعم (Blush Rose)"></div>
-        <div class="color-swatch" style="background-color: #c5a059;" title="ذهبي هادئ (Champagne Gold)"></div>
-        <div class="color-swatch" style="background-color: #2c2523;" title="فحمي ملكي (Midnight Charcoal)"></div>
-        <div class="color-swatch" style="background-color: #f3ebd8;" title="أوف وايت / سكري (Warm Cream)"></div>
+        <div class="color-swatch-wrap">
+          <div class="color-swatch" style="background-color: #e5b3b3;"></div>
+          <div class="color-label">وردي</div>
+        </div>
+        <div class="color-swatch-wrap">
+          <div class="color-swatch" style="background-color: #c5a059;"></div>
+          <div class="color-label">ذهبي</div>
+        </div>
+        <div class="color-swatch-wrap">
+          <div class="color-swatch" style="background-color: #2a2421;"></div>
+          <div class="color-label">كلاسيكي</div>
+        </div>
+        <div class="color-swatch-wrap">
+          <div class="color-swatch" style="background-color: #f6eedd;"></div>
+          <div class="color-label">عاجي</div>
+        </div>
       </div>
     </section>
 
-    <!-- كرت الموقع وخريطة المكان -->
-    <section class="invitation-card" style="text-align: center;">
-      <h2 class="section-title">موقع الحفل</h2>
+    <!-- =========================================
+         8. VENUE LOCATION
+    ========================================= -->
+    <section class="invitation-card reveal" style="text-align: center;">
+      <h2 class="section-title gold-shimmer-text">موقع الحفل</h2>
       <p class="section-subtitle">قاعة فيروز</p>
       
       <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 18px;">
-        حضوركم يُبهجنا ويكمل فرحتنا في هذه الليلة المميزة.
+        حضوركم تاج فرحتنا، ويسعدنا مشاركتكم لنا هذا اليوم البهيج.
       </p>
 
       <a href="https://maps.google.com/?q=قاعة+فيروز" target="_blank" class="btn btn-primary">
-        <i class="fa-solid fa-location-arrow"></i> فتح الموقع في خرائط Google
+        <i class="fa-solid fa-location-dot"></i> فتح الموقع في خرائط Google
       </a>
     </section>
 
-    <!-- كرت تأكيد الحضور (RSVP) -->
-    <section class="invitation-card" id="rsvp">
-      <h2 class="section-title">تأكيد الحضور</h2>
+    <!-- =========================================
+         9. RSVP FORM
+    ========================================= -->
+    <section class="invitation-card reveal" id="rsvp">
+      <h2 class="section-title gold-shimmer-text">تأكيد الحضور</h2>
       <p class="section-subtitle">يرجى تأكيد الحضور قبل 15 سبتمبر 2026</p>
 
       <form id="rsvpForm" onsubmit="handleRSVP(event)">
@@ -664,7 +970,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="guestCount">عدد الحضور</label>
+          <label class="form-label" for="guestCount">عدد المرافقين</label>
           <select id="guestCount" class="form-control">
             <option value="1">شخص واحد</option>
             <option value="2">شخصين</option>
@@ -673,8 +979,8 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="notes">كلمة أو تهنئة للعروسين</label>
-          <textarea id="notes" rows="3" class="form-control" placeholder="اكتب تمنياتك الطيبة لسالم ووفاء..."></textarea>
+          <label class="form-label" for="notes">رسالة أو تهنئة للعروسين</label>
+          <textarea id="notes" rows="3" class="form-control" placeholder="اكتب تمنياتك الجميلة لسالم ووفاء..."></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">
@@ -683,24 +989,118 @@
       </form>
     </section>
 
-    <!-- الفوتر -->
-    <footer>
-      <p class="font-calligraphy" style="font-size: 1.8rem; color: var(--gold-dark); margin-bottom: 2px;">سالم & وفاء</p>
-      <p>نتطلع لرؤيتكم ومشاركتنا أجمل اللحظات ✨</p>
+    <!-- FOOTER -->
+    <footer class="reveal">
+      <p style="font-family: 'Aref Ruqaa', serif; font-size: 2rem; color: var(--gold-dark); margin-bottom: 4px;">سالم & وفاء</p>
+      <p>عقبال الفرحة الكبرى بحضوركم جميعاً ✨</p>
     </footer>
 
   </main>
 
-  <!-- تكبير الصورة -->
+  <!-- Lightbox Modal -->
   <div id="modal" class="modal" onclick="closeLightbox()">
     <img id="modalImg" src="" alt="عرض كامل" />
   </div>
 
-  <!-- رسالة التنبيه بعد الإرسال -->
-  <div id="toast" class="toast">شكراً لك! تم استلام ردك بكل حب ✨</div>
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">شكراً لك! تم استلام تأكيدك بكل حب وسرور ✨</div>
 
   <script>
-    // 1. حساب العداد التنازلي
+    // 1. OPENING INVITATION & MUSIC TRIGGER
+    const bgMusic = document.getElementById("bgMusic");
+    const musicToggle = document.getElementById("musicToggle");
+    let isPlaying = false;
+
+    function openInvitation() {
+      const overlay = document.getElementById("introOverlay");
+      overlay.classList.add("opened");
+
+      // Auto start music upon user tap
+      bgMusic.play().then(() => {
+        isPlaying = true;
+        musicToggle.classList.add("playing");
+      }).catch(e => console.log("Autoplay check:", e));
+
+      // Trigger initial soft confetti burst
+      confetti({
+        particleCount: 60,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#c5a059', '#e5b3b3', '#ffffff']
+      });
+    }
+
+    musicToggle.addEventListener("click", () => {
+      if (!isPlaying) {
+        bgMusic.play();
+        musicToggle.classList.add("playing");
+        isPlaying = true;
+      } else {
+        bgMusic.pause();
+        musicToggle.classList.remove("playing");
+        isPlaying = false;
+      }
+    });
+
+    // 2. FALLING PETALS & GOLD PARTICLES (CANVAS)
+    const canvas = document.getElementById('petalCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const totalParticles = 25;
+
+    for (let i = 0; i < totalParticles; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 8 + 6,
+        speedY: Math.random() * 1 + 0.6,
+        speedX: Math.random() * 1 - 0.5,
+        rotation: Math.random() * 360,
+        rotationSpeed: Math.random() * 2 - 1,
+        color: Math.random() > 0.4 ? 'rgba(229, 179, 179, 0.6)' : 'rgba(197, 160, 89, 0.55)'
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+
+        // Draw soft petal shape
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(p.size / 2, -p.size, p.size, 0);
+        ctx.quadraticCurveTo(p.size / 2, p.size, 0, 0);
+        ctx.fill();
+        ctx.restore();
+
+        p.y += p.speedY;
+        p.x += p.speedX;
+        p.rotation += p.rotationSpeed;
+
+        if (p.y > height) {
+          p.y = -15;
+          p.x = Math.random() * width;
+        }
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // 3. COUNTDOWN TIMER (10 Oct 2026 - 6:00 PM)
     const targetDate = new Date("October 10, 2026 18:00:00").getTime();
 
     function updateCountdown() {
@@ -708,48 +1108,42 @@
       const diff = targetDate - now;
 
       if (diff > 0) {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById("days").innerText = String(days).padStart(2, '0');
-        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        document.getElementById("days").innerText = String(d).padStart(2, '0');
+        document.getElementById("hours").innerText = String(h).padStart(2, '0');
+        document.getElementById("minutes").innerText = String(m).padStart(2, '0');
+        document.getElementById("seconds").innerText = String(s).padStart(2, '0');
       }
     }
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 2. التحكم في الموسيقى
-    const musicBtn = document.getElementById("musicToggle");
-    const bgMusic = document.getElementById("bgMusic");
-    let isPlaying = false;
+    // 4. SCROLL REVEAL (Intersection Observer)
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.15 });
 
-    musicBtn.addEventListener("click", () => {
-      if (!isPlaying) {
-        bgMusic.play().then(() => {
-          musicBtn.classList.add("playing");
-          isPlaying = true;
-        }).catch(err => console.log("تعذر التشغيل التلقائي"));
-      } else {
-        bgMusic.pause();
-        musicBtn.classList.remove("playing");
-        isPlaying = false;
-      }
-    });
+    reveals.forEach(el => observer.observe(el));
 
-    // 3. إضافة إلى تقويم جوجل
+    // 5. ADD TO CALENDAR (.ICS + GOOGLE)
     function addToCalendar() {
       const title = encodeURIComponent("حفل خطوبة سالم ووفاء");
       const location = encodeURIComponent("قاعة فيروز");
-      const details = encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحة خطوبتنا في قاعة فيروز.");
+      const details = encodeURIComponent("يسعدنا حضوركم ومشاركتنا فرحتنا في حفل خطوبة سالم ووفاء بقاعة فيروز.");
       const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261010T150000Z/20261010T210000Z&details=${details}&location=${location}`;
       window.open(googleCalUrl, '_blank');
     }
 
-    // 4. معرض الصور
+    // 6. LIGHTBOX MODAL
     function openLightbox(src) {
       document.getElementById("modalImg").src = src;
       document.getElementById("modal").style.display = "flex";
@@ -758,24 +1152,23 @@
       document.getElementById("modal").style.display = "none";
     }
 
-    // 5. إرسال الفورم وقصاصات الاحتفال (Confetti)
+    // 7. RSVP FORM SUBMISSION
     function handleRSVP(e) {
       e.preventDefault();
-      
-      // إطلاق القصاصات الذهبية والوردية
+
+      // Confetti celebration
       confetti({
-        particleCount: 90,
-        spread: 75,
+        particleCount: 110,
+        spread: 85,
         origin: { y: 0.7 },
-        colors: ['#c5a059', '#e5b8b8', '#ffffff']
+        colors: ['#c5a059', '#e5b3b3', '#ffffff']
       });
 
-      // إظهار التنبيه
+      // Show Toast
       const toast = document.getElementById("toast");
       toast.className = "toast show";
       setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 4000);
 
-      // تفريغ الحقول
       document.getElementById("rsvpForm").reset();
     }
   </script>

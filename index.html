@@ -107,7 +107,7 @@
 
     .image-invitation-card {
       width: 100%;
-      aspect-ratio: 515 / 747; /* النسبة المتوافقة مع الصور الطولية */
+      aspect-ratio: 515 / 747; /* النسبة المتوافقة مع أبعاد صياغة الأكريليك */
       background: url('card-bg.jpg') center center / 100% 100% no-repeat transparent;
       border-radius: 12px;
       box-shadow: 0 25px 65px rgba(0, 0, 0, 0.7);
@@ -132,7 +132,6 @@
       text-align: center; z-index: 5;
     }
 
-    /* نصوص البطاقة واضحة بفضل الظلال */
     .bismillah-text {
       font-family: 'Aref Ruqaa', serif; font-size: 1.15rem;
       color: var(--img-bronze-dark); margin-bottom: 4px;
@@ -140,12 +139,12 @@
     }
     body.lang-en .bismillah-text { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; font-style: italic; }
 
-    /* الآية باللون الأبيض الساطع كما طلبت */
+    /* الآية باللون الأبيض الناصع مع ظل حاد للوضوح */
     .quran-text {
       font-family: 'Amiri', serif; font-size: 0.85rem;
-      color: #ffffff; /* أبيض */
+      color: #ffffff !important; /* أبيض */
       line-height: 1.6; margin-bottom: 8px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.7); /* ظل غامق لضمان قراءته فوق أي خلفية */
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5);
     }
     body.lang-en .quran-text { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-style: italic; }
 
@@ -166,7 +165,6 @@
       text-shadow: 0 1px 2px rgba(255,255,255,0.5);
     }
 
-    /* التفاصيل بخلفية شفافة تماماً */
     .details-box {
       background: transparent; border: none; padding: 0; margin: 6px 0; width: 100%;
     }
@@ -178,7 +176,6 @@
     body.lang-en .date-text { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; }
     .time-text { font-size: 0.75rem; color: var(--glass-text-dark); font-weight: 600; text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
 
-    /* العداد التنازلي بخلفية شفافة وحواف خفيفة جداً */
     .mini-countdown {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
       margin: 8px 0; width: 100%;
@@ -192,21 +189,36 @@
     .mc-lbl { font-size: 0.55rem; color: var(--glass-text-dark); font-weight: 600; text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
 
     /* =========================================
-       اسم الضيف والمقاعد (تم نقلها للأسفل)
+       اسم الضيف وعدد الأشخاص باللون الأبيض في الأسفل
     ========================================= */
     .guest-pill {
       display: none;
       background: transparent;
       border: none;
-      border-top: 1px solid rgba(197, 160, 89, 0.4); /* خط فاصل علوي أنيق */
+      border-top: 1px solid rgba(197, 160, 89, 0.4);
       border-radius: 0;
-      padding-top: 8px;
-      margin-top: 8px;
-      margin-bottom: 8px;
+      padding-top: 6px;
+      margin-top: 6px;
+      margin-bottom: 6px;
       width: 100%;
     }
-    .guest-pill span.name { font-family: 'Aref Ruqaa', serif; font-size: 1.25rem; font-weight: 700; color: var(--burgundy-rose); display: block; text-shadow: 0 1px 3px rgba(255,255,255,0.6); }
-    .guest-pill span.seats { font-size: 0.75rem; color: var(--gold-primary); font-weight: 600; text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
+    /* اسم الضيف أبيض ساطع بحواف ظليّة رائعة */
+    .guest-pill span.name {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff !important; /* أبيض */
+      display: block;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8), 0 0 6px rgba(0, 0, 0, 0.6);
+    }
+    /* عدد الأشخاص باللون الأبيض مع البريق */
+    .guest-pill span.seats {
+      font-size: 0.75rem;
+      color: #ffffff !important; /* أبيض */
+      font-weight: 600;
+      display: block;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
     body.lang-en .guest-pill span.name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; }
 
     /* الأزرار التفاعلية */
@@ -214,14 +226,14 @@
       display: flex; flex-direction: column; gap: 6px; width: 100%; margin-top: 4px;
     }
     .btn-chic {
-      background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(4px);
+      background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(4px);
       border: 1px solid rgba(197, 160, 89, 0.5); color: var(--burgundy-dark);
       padding: 8px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; font-family: inherit;
       cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: background 0.2s;
     }
     .btn-chic:hover { background: rgba(255, 255, 255, 0.95); }
     .btn-chic i { font-size: 0.9rem; color: var(--gold-primary); }
-    .btn-chic.main-action { background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.95)); border-color: var(--burgundy-rose); }
+    .btn-chic.main-action { background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.98)); border-color: var(--burgundy-rose); }
     .btn-chic.main-action i { color: #25D366; }
 
     .btn-view-card {
@@ -262,7 +274,6 @@
       cursor: pointer; display: flex; align-items: center; justify-content: center;
     }
 
-    /* فورم الحضور */
     .form-group { margin-bottom: 14px; text-align: right; }
     body.lang-en .form-group { text-align: left; }
     .form-label { display: block; font-size: 0.82rem; color: var(--burgundy-dark); margin-bottom: 4px; font-weight: 600; }
@@ -289,7 +300,6 @@
       cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
     }
 
-    /* خيارات الخرائط */
     .nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     .nav-btn {
       background: #fff; border: 1px solid rgba(197, 160, 89, 0.3); border-radius: 10px;
@@ -297,7 +307,6 @@
       display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600;
     }
 
-    /* تذكرة الدخول VIP */
     .vip-ticket {
       background: #fff; border: 2px dashed var(--gold-primary);
       border-radius: 12px; padding: 16px; margin: 10px 0; text-align: center;
@@ -305,7 +314,7 @@
     #qrcodeHolder { display: flex; justify-content: center; margin: 12px auto; }
 
     /* =========================================
-       5. عرض الصورة النقية للتصدير (حفظ كصورة)
+       5. عرض الصورة النقية للتصدير
     ========================================= */
     #renderModal { align-items: center; justify-content: center; padding: 16px; }
     .render-container { width: 100%; max-width: 420px; position: relative; }
@@ -328,11 +337,11 @@
     }
 
     .toast {
-      visibility: hidden; min-width: 260px;
+      visibility: hidden; min-width: 280px;
       background: rgba(28, 26, 24, 0.9); color: #fff; text-align: center;
       border-radius: 30px; padding: 12px 20px; position: fixed;
       z-index: 30000; left: 50%; bottom: 80px; transform: translateX(-50%);
-      font-size: 0.85rem; border: 1px solid var(--gold-primary);
+      font-size: 0.9rem; border: 1px solid var(--gold-primary);
     }
     .toast.show { visibility: visible; }
   </style>
@@ -391,7 +400,7 @@
         
         <p class="bismillah-text" data-i18n="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ</p>
 
-        <!-- الآية باللون الأبيض الناصع كما طلبت -->
+        <!-- الآية باللون الأبيض الناصع -->
         <p class="quran-text" data-i18n="quran_verse">
           ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾
         </p>
@@ -418,7 +427,7 @@
           <div class="mc-cell"><div class="mc-val" id="seconds">00</div><div class="mc-lbl" data-i18n="secs">ثواني</div></div>
         </div>
 
-        <!-- 🌟 تم نقل اسم الضيف وعدد المقاعد للأسفل هنا 🌟 -->
+        <!-- 🌟 اسم الضيف وعدد الأشخاص باللون الأبيض في الأسفل هنا 🌟 -->
         <div id="guestSpecialBadge" class="guest-pill">
           <span id="guestBadgeName" class="name">ضيوفنا الكرام</span>
           <span id="guestBadgeSeats" class="seats"></span>
@@ -448,103 +457,13 @@
     </button>
   </div>
 
-
   <!-- =========================================
-       3. النوافذ المنبثقة (Modals)
+       3. نافذة العرض المنبثقة: بطاقة الدعوة الرسمية كصورة
   ========================================= -->
+  <div id="cardModal" class="card-modal-backdrop" onclick="closeCardModalOnBackdrop(event, this)">
+    <div class="card-modal-container">
+      <button class="modal-floating-close" onclick="closeCardModal()"><i class="fa-solid fa-xmark"></i></button>
 
-  <!-- نافذة تأكيد الحضور -->
-  <div id="rsvpModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, this)">
-    <div class="modal-sheet">
-      <div class="sheet-header">
-        <h3 class="sheet-title" data-i18n="rsvp_title">تأكيد الحضور</h3>
-        <button class="sheet-close" onclick="closeModal('rsvpModal')"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <form onsubmit="handleRSVP(event)">
-        <div class="form-group">
-          <label class="form-label" data-i18n="name_label">الاسم الكريم</label>
-          <input type="text" id="guestName" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-i18n="attendance_label">هل ستشرفنا بالحضور؟</label>
-          <div class="radio-group">
-            <label class="radio-card">
-              <input type="radio" name="attending" value="yes" checked />
-              <div class="radio-custom"><i class="fa-regular fa-circle-check" style="margin-left:4px;"></i> <span data-i18n="accept">يشرفني</span></div>
-            </label>
-            <label class="radio-card">
-              <input type="radio" name="attending" value="no" />
-              <div class="radio-custom"><i class="fa-regular fa-circle-xmark" style="margin-left:4px;"></i> <span data-i18n="decline">أعتذر</span></div>
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-i18n="seats_label">عدد المقاعد المحجوزة</label>
-          <select id="guestCount" class="form-control"></select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-i18n="wishes_label">رسالة للعروسين</label>
-          <textarea id="notes" rows="2" class="form-control"></textarea>
-        </div>
-        <button type="submit" class="btn-submit">
-          <i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> <span data-i18n="send_rsvp">إرسال التأكيد</span>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- نافذة تذكرة الدخول VIP -->
-  <div id="passModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, this)">
-    <div class="modal-sheet" style="border-radius:20px;">
-      <h3 style="font-family:'Aref Ruqaa',serif; font-size:1.5rem; color:var(--burgundy-dark); text-align:center;" data-i18n="ticket_title">بطاقة دخول VIP</h3>
-      <div class="vip-ticket">
-        <p style="font-size:0.75rem; color:var(--gold-primary); text-transform:uppercase;">Salem & Wafaa Engagement</p>
-        <h4 id="ticketGuestName" style="font-family:'Aref Ruqaa',serif; font-size:1.4rem; color:var(--burgundy-rose); margin:4px 0;">اسم الضيف</h4>
-        <p style="font-size:0.8rem; color:var(--glass-text-muted);"><span data-i18n="seats_confirmed">المقاعد المؤكدة:</span> <strong id="ticketSeatsCount">1</strong></p>
-        <div id="qrcodeHolder"></div>
-      </div>
-      <button onclick="closeModal('passModal')" class="btn-submit" style="background:var(--burgundy-dark);">
-        <i class="fa-solid fa-check"></i> <span data-i18n="done_text">تم، شكراً لكم</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- نافذة الخرائط -->
-  <div id="navModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, this)">
-    <div class="modal-sheet">
-      <div class="sheet-header">
-        <h3 class="sheet-title" data-i18n="choose_maps">الوصول للصالة</h3>
-        <button class="sheet-close" onclick="closeModal('navModal')"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="nav-grid">
-        <a href="https://maps.google.com/?q=صالة+فيروز" target="_blank" class="nav-btn"><i class="fa-brands fa-google" style="color:#4285F4; font-size:1.3rem;"></i>Google Maps</a>
-        <a href="http://maps.apple.com/?q=صالة+فيروز" target="_blank" class="nav-btn"><i class="fa-brands fa-apple" style="color:#000; font-size:1.3rem;"></i>Apple Maps</a>
-        <a href="https://waze.com/ul?q=صالة+فيروز" target="_blank" class="nav-btn"><i class="fa-brands fa-waze" style="color:#33CCFF; font-size:1.3rem;"></i>Waze</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- نافذة التقويم -->
-  <div id="calendarModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, this)">
-    <div class="modal-sheet">
-      <div class="sheet-header">
-        <h3 class="sheet-title" data-i18n="save_calendar_title">حفظ الموعد</h3>
-        <button class="sheet-close" onclick="closeModal('calendarModal')"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <button onclick="addToGoogleCalendar()" class="btn-submit" style="background:#4285F4;"><i class="fa-brands fa-google"></i> Google Calendar</button>
-        <button onclick="downloadICS()" class="btn-submit" style="background:#333;"><i class="fa-brands fa-apple"></i> Apple / Outlook</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- =========================================
-       4. نافذة التصدير (البطاقة النقية كصورة)
-  ========================================= -->
-  <div id="renderModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, this)">
-    <div class="render-container">
-      <button class="close-floating" onclick="closeModal('renderModal')"><i class="fa-solid fa-xmark"></i></button>
-      
       <!-- الصورة النقية الخالية من الأزرار للتصدير -->
       <div class="clean-image-card" id="cleanCardToExport">
         <div class="clean-window">
@@ -570,7 +489,7 @@
             <p class="time-text"><span data-i18n="time_text">الساعة 6:00 مساءً</span> • <span data-i18n="venue_name">صالة فيروز</span></p>
           </div>
 
-          <!-- 🌟 اسم الضيف والمقاعد في الأسفل للبطاقة المُصدّرة 🌟 -->
+          <!-- اسم الضيف وعدد الأشخاص باللون الأبيض في أسفل بطاقة التصدير -->
           <div id="renderGuestPill" class="guest-pill" style="margin-top:20px;">
             <span class="name" id="renderGuestName"></span>
             <span class="seats" id="renderGuestSeats"></span>
@@ -585,13 +504,93 @@
     </div>
   </div>
 
+  <!-- النوافذ المساعدة -->
+  <div id="rsvpModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, this)">
+    <div class="modal-sheet">
+      <div class="sheet-header">
+        <h3 class="sheet-title" data-i18n="rsvp_title">تأكيد الحضور</h3>
+        <button class="sheet-close" onclick="closeModal('rsvpModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form onsubmit="handleRSVP(event)">
+        <div class="form-group">
+          <label class="form-label" data-i18n="name_label">الاسم الكريم</label>
+          <input type="text" id="guestName" class="form-control" placeholder="أدخل اسمك الكريم..." required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="attendance_label">هل ستشرفنا بالحضور؟</label>
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="attending" value="yes" checked />
+              <div class="radio-custom"><i class="fa-regular fa-circle-check" style="margin-left:4px;"></i> <span data-i18n="accept">يشرفني</span></div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="attending" value="no" />
+              <div class="radio-custom"><i class="fa-regular fa-circle-xmark" style="margin-left:4px;"></i> <span data-i18n="decline">أعتذر</span></div>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="guestCount" data-i18n="seats_label">عدد الأشخاص</label>
+          <select id="guestCount" class="form-control"></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="wishes_label">تهنئة أو رسالة للعروسين</label>
+          <textarea id="notes" rows="2" class="form-control" placeholder="اكتب تمنياتك الطيبة..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">
+          <i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> <span data-i18n="send_rsvp">إرسال التأكيد</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="passModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, this)">
+    <div class="modal-sheet" style="border-radius:20px;">
+      <h3 style="font-family:'Aref Ruqaa',serif; font-size:1.5rem; color:var(--burgundy-dark); text-align:center;" data-i18n="ticket_title">بطاقة دخول VIP</h3>
+      <div class="vip-ticket">
+        <p style="font-size:0.75rem; color:var(--gold-primary); text-transform:uppercase;">Salem & Wafaa Engagement</p>
+        <h4 id="ticketGuestName" style="font-family:'Aref Ruqaa',serif; font-size:1.4rem; color:var(--burgundy-rose); margin:4px 0;">اسم الضيف</h4>
+        <p style="font-size:0.8rem; color:var(--glass-text-muted);"><span data-i18n="seats_confirmed">عدد الأشخاص المؤكد:</span> <strong id="ticketSeatsCount">1</strong></p>
+        <div id="qrcodeHolder"></div>
+      </div>
+      <button onclick="closeModal('passModal')" class="btn-submit" style="background:var(--burgundy-dark);">
+        <i class="fa-solid fa-check"></i> <span data-i18n="done_text">تم، شكراً لكم</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="navModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, this)">
+    <div class="modal-sheet">
+      <div class="sheet-header">
+        <h3 class="sheet-title" data-i18n="choose_maps">الوصول للصالة</h3>
+        <button class="sheet-close" onclick="closeModal('navModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="nav-grid">
+        <a href="https://maps.google.com/?q=صالة+فيروز" target="_blank" class="nav-btn"><i class="fa-brands fa-google" style="color:#4285F4; font-size:1.3rem;"></i>Google Maps</a>
+        <a href="http://maps.apple.com/?q=صالة+فيروز" target="_blank" class="nav-btn"><i class="fa-brands fa-apple" style="color:#000; font-size:1.3rem;"></i>Apple Maps</a>
+        <a href="https://waze.com/ul?q=صالة+فيروز" target="_blank" class="nav-btn"><i class="fa-brands fa-waze" style="color:#33CCFF; font-size:1.3rem;"></i>Waze</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="calendarModal" class="modal-backdrop" onclick="closeModalOnBackdrop(event, this)">
+    <div class="modal-sheet">
+      <div class="sheet-header">
+        <h3 class="sheet-title" data-i18n="save_calendar_title">حفظ الموعد</h3>
+        <button class="sheet-close" onclick="closeModal('calendarModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button onclick="addToGoogleCalendar()" class="btn-submit" style="background:#4285F4;"><i class="fa-brands fa-google"></i> Google Calendar</button>
+        <button onclick="downloadICS()" class="btn-submit" style="background:#333;"><i class="fa-brands fa-apple"></i> Apple / Outlook</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="toast">جاري المعالجة ✨</div>
 
-  <!-- =========================================
-       5. كود JavaScript
-  ========================================= -->
+  <!-- JavaScript -->
   <script>
-    // ⭐ ضع رقم هاتفك هنا مع مفتاح الدولة (بدون + أو أصفار)
+    // ⭐ رقم هاتفك لواتساب مع مفتاح الدولة (بدون + أو أصفار) ⭐
     const WHATSAPP_PHONE_NUMBER = "96170041203";
 
     // 1. قاموس اللغات (عربي / English)
@@ -609,10 +608,10 @@
         days:"أيام", hours:"ساعات", mins:"دقائق", secs:"ثواني",
         view_official_card:"عرض البطاقة الرسمية وحفظها", rsvp_title:"تأكيد الحضور (RSVP)",
         name_label:"الاسم الكريم", attendance_label:"هل ستشرفنا بالحضور؟", accept:"يشرفني", decline:"أعتذر",
-        seats_label:"عدد المقاعد المحجوزة", wishes_label:"رسالة للعروسين", send_rsvp:"إرسال التأكيد",
+        seats_label:"عدد الأشخاص", wishes_label:"رسالة للعروسين", send_rsvp:"إرسال التأكيد",
         directions:"الموقع", add_calendar:"التقويم", save_card_btn:"حفظ الصورة في الهاتف",
         lang_btn:"English", choose_maps:"الوصول للصالة", save_calendar_title:"حفظ الموعد",
-        ticket_title:"بطاقة دخول VIP", seats_confirmed:"المقاعد المؤكدة:", done_text:"تم، شكراً لكم"
+        ticket_title:"بطاقة دخول VIP", seats_confirmed:"عدد الأشخاص المؤكد:", done_text:"تم، شكراً لكم"
       },
       en: {
         couple_intro:"Salem & Wafaa", envelope_sub:"Engagement Invitation", honor_text:"Honored to have you",
@@ -624,16 +623,17 @@
         days:"Days", hours:"Hours", mins:"Mins", secs:"Secs",
         view_official_card:"View & Save Official Card", rsvp_title:"RSVP",
         name_label:"Full Name", attendance_label:"Will you attend?", accept:"Accepts", decline:"Declines",
-        seats_label:"Number of Guests", wishes_label:"Notes", send_rsvp:"Send RSVP",
+        seats_label:"Number of Persons", wishes_label:"Notes", send_rsvp:"Send RSVP",
         directions:"Map", add_calendar:"Calendar", save_card_btn:"Save Image to Phone",
         lang_btn:"العربية", choose_maps:"Choose Maps App", save_calendar_title:"Add to Calendar",
-        ticket_title:"VIP Entry Pass", seats_confirmed:"Confirmed Seats:", done_text:"Done"
+        ticket_title:"VIP Entry Pass", seats_confirmed:"Confirmed Persons:", done_text:"Done"
       }
     };
 
     function updateSeatsText() {
       if (assignedSeats && assignedSeats > 0) {
-        const tAr = `(المقاعد: ${assignedSeats})`; const tEn = `(Seats: ${assignedSeats})`;
+        const tAr = `(عدد الأشخاص: ${assignedSeats === 1 ? 'شخص واحد' : assignedSeats === 2 ? 'شخصين' : assignedSeats + ' أشخاص'})`; 
+        const tEn = `(Persons: ${assignedSeats})`;
         const el1 = document.getElementById('guestBadgeSeats'), el2 = document.getElementById('renderGuestSeats');
         if (el1) el1.innerText = currentLang === 'ar' ? tAr : tEn;
         if (el2) el2.innerText = currentLang === 'ar' ? tAr : tEn;
@@ -665,7 +665,7 @@
       const cleanName = decodeURIComponent(guestNameParam).replace(/\+/g, ' ');
       document.getElementById('envelopeGuestName').innerText = cleanName;
       
-      // إظهار الاسم في البطاقة التفاعلية
+      // إظهار الاسم في البطاقة التفاعلية بالأسفل
       const guestBadge = document.getElementById('guestSpecialBadge');
       guestBadge.style.display = 'block';
       document.getElementById('guestBadgeName').innerText = cleanName;
@@ -685,7 +685,7 @@
       for (let i = 1; i <= maxG; i++) {
         const o = document.createElement('option');
         o.value = i;
-        o.innerText = i === 1 ? (currentLang==='ar'?'مقعد واحد (1)':'1 Person') : (i === 2 ? (currentLang==='ar'?'مقعدين (2)':'2 Persons') : `${i} ${currentLang==='ar'?'مقاعد':'Persons'}`);
+        o.innerText = i === 1 ? (currentLang==='ar'?'شخص واحد (1)':'1 Person') : (i === 2 ? (currentLang==='ar'?'شخصين (2)':'2 Persons') : `${i} ${currentLang==='ar'?'أشخاص':'Persons'}`);
         if (i === maxG) o.selected = true; sel.appendChild(o);
       }
     }
@@ -775,9 +775,13 @@
     // النوافذ
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-    function closeModalOnBackdrop(e, el) { if (e.target === el) el.classList.remove('active'); }
+    function closeModalOnBackdrop(e, el) { if (e.target === el) closeModal(id); }
 
-    // حفظ البطاقة
+    function openCardModal() { document.getElementById('cardModal').classList.add('active'); }
+    function closeCardModal() { document.getElementById('cardModal').classList.remove('active'); }
+    function closeCardModalOnBackdrop(e, el) { if (e.target === el) closeCardModal(); }
+
+    // حفظ البطاقة كصورة
     function downloadCardImage() {
       showToast(currentLang === 'ar' ? 'جاري التجهيز...' : 'Preparing...');
       html2canvas(document.getElementById('cleanCardToExport'), { scale: 3, useCORS: true, backgroundColor: null })
@@ -794,9 +798,9 @@
     }
 
     // التقويم
-    function addToGoogleCalendar() { window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent("Salem & Wafaa Engagement")}&dates=20261010T150000Z/20261010T210000Z&location=${encodeURIComponent("Fayroz Hall")}`, '_blank'); }
+    function addToGoogleCalendar() { window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent("Salem & Wafaa Engagement 💍")}&dates=20261010T150000Z/20261010T210000Z&location=${encodeURIComponent("صالة فيروز")}`, '_blank'); }
     function downloadICS() {
-      const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:20261010T150000Z\r\nDTEND:20261010T210000Z\r\nSUMMARY:Salem & Wafaa Engagement\r\nLOCATION:Fayroz Hall\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+      const ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:20261010T150000Z\r\nDTEND:20261010T210000Z\r\nSUMMARY:Salem & Wafaa Engagement\r\nLOCATION:صالة فيروز\r\nEND:VEVENT\r\nEND:VCALENDAR`;
       const blob = new Blob([ics], { type: 'text/calendar' });
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'salem-wafaa.ics'; a.click();
     }
@@ -808,14 +812,14 @@
       const a = document.querySelector('input[name="attending"]:checked').value === 'yes' ? (currentLang==='ar'?'✅ يشرفني الحضور':'✅ Accepts') : (currentLang==='ar'?'❌ أعتذر':'❌ Declines');
       const g = document.getElementById('guestCount').value;
       const t = document.getElementById('notes').value.trim();
-      const al = assignedSeats ? (currentLang==='ar'?` (من ${assignedSeats} مقاعد)`:` (out of ${assignedSeats})`) : '';
+      const al = assignedSeats ? (currentLang==='ar'?` (من أصل ${assignedSeats} أشخاص)`:` (out of ${assignedSeats})`) : '';
 
-      const msg = `*${currentLang==='ar'?'تأكيد حضور خطوبة سالم ووفاء':'Salem & Wafaa RSVP'}* 💍\n━━━━━━━━━━━━━━\n👤 *${currentLang==='ar'?'الاسم:':'Name:'}* ${n}\n✨ *${currentLang==='ar'?'الحالة:':'Status:'}* ${a}\n👥 *${currentLang==='ar'?'العدد:':'Seats:'}* ${g}${al}\n💌 *${currentLang==='ar'?'رسالة:':'Note:'}* ${t || '-'}\n━━━━━━━━━━━━━━\n📅 10/10/2026 6:00 PM\n📍 Fayroz Hall`;
+      const msg = `*${currentLang==='ar'?'تأكيد حضور خطوبة سالم ووفاء':'Salem & Wafaa RSVP'}* 💍\n━━━━━━━━━━━━━━\n👤 *${currentLang==='ar'?'الاسم:':'Name:'}* ${n}\n✨ *${currentLang==='ar'?'الحالة:':'Status:'}* ${a}\n👥 *${currentLang==='ar'?'عدد الأشخاص:':'Persons:'}* ${g}${al}\n💌 *${currentLang==='ar'?'رسالة:':'Note:'}* ${t || '-'}\n━━━━━━━━━━━━━━\n📅 10/10/2026 - 6:00 PM\n📍 صالة فيروز`;
 
       document.getElementById('ticketGuestName').innerText = n;
       document.getElementById('ticketSeatsCount').innerText = `${g} ${al}`;
       const qrContainer = document.getElementById('qrcodeHolder'); qrContainer.innerHTML = '';
-      new QRCode(qrContainer, { text: `VIP: Salem & Wafaa | Guest: ${n} | Seats: ${g}`, width: 100, height: 100, colorDark : "#6b0f1a", colorLight : "#fff" });
+      new QRCode(qrContainer, { text: `VIP: Salem & Wafaa | Guest: ${n} | Seats: ${g}`, width: 110, height: 110, colorDark : "#6b0f1a", colorLight : "#ffffff" });
 
       confetti({ particleCount: 90, spread: 80, origin: { y: 0.65 }, colors: ['#25D366','#6b0f1a','#c5a059'] });
       
